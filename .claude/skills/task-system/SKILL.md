@@ -85,6 +85,12 @@ rules:
 - Human interrupts with new instruction
 - Task closes (PASS → learn → close completes)
 
+**Autonomy reminder (loop mode only):**
+Once loop mode is active, you are autonomous. Do NOT pause to ask "should I
+continue?" or "is this a good stopping point?" — the human may be away.
+Keep executing phases until STUCK, BLOCKED, or PASS. Mid-loop approval
+requests are a bug. See `## Autonomy` in CLAUDE.md for the full rules.
+
 ---
 
 ## Cross-repo tasks
@@ -360,6 +366,9 @@ direction, auto-advance to build.
 ---
 
 ## Phase: Build
+
+**Pre-check:** If `target_repo` is set in frontmatter → STOP. Do not build
+in this repo. Follow `## Cross-repo tasks` handoff rules instead.
 
 **Reads:** ## Plan, ## Work (avoid repeats), ## Fix (avoid failed approaches)
 
