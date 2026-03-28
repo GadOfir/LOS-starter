@@ -1,8 +1,8 @@
 ---
 id: task-003
 title: Add autonomy prompt to task-system + harden cross-repo handoff
-status: IN_PROGRESS
-phase: verify
+status: PASS
+phase: learn
 mode: loop
 target_repo:
 blocked_reason:
@@ -66,3 +66,10 @@ That's it. Two surgical edits, same file, both repos.
 ## Fix
 
 ## Learn
+**Insights:**
+- Skill prompts are the primary context during execution — CLAUDE.md rules need reinforcement inside the skill that runs them
+- Cross-repo handoff needs guards at the action point (Build section), not just as a standalone reference section
+- Back-port between repos can happen from either side — check before assuming it's needed
+
+**Watch out for:**
+- Two copies of task-system SKILL.md (LOS + LOS-starter) can drift — always diff section headers after edits

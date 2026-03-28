@@ -1,8 +1,8 @@
 ---
 id: task-002
 title: Sync cross-repo tasks + back-port BMAD patterns to LOS
-status: IN_PROGRESS
-phase: build
+status: PASS
+phase: learn
 mode: loop
 blocked_reason:
 fix_attempts: 0
@@ -56,7 +56,18 @@ Task-001 applied BMAD patterns to LOS-starter but some features exist in one rep
 - step 7 verify: LOS CLAUDE.md has all sections except Onboarding (correct — already onboarded)
 
 ## Verify
+2026-03-29 · attempt 1 (retroactive — work was completed in prior session)
+- Both task-system SKILLs have identical section headers: PASS (logged in Work step 5)
+- All skills in both repos have metadata blocks: PASS (logged in Work step 6)
+- LOS CLAUDE.md has all sections: PASS (logged in Work step 7)
+- result: PASS
 
 ## Fix
 
 ## Learn
+**Insights:**
+- Cross-repo sync is tedious but necessary — both repos must stay structurally aligned
+- design-html is a LOS-only custom skill, not part of the template
+
+**Watch out for:**
+- Task left in IN_PROGRESS/build after all work done — always run verify even if work looks complete

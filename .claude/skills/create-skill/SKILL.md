@@ -1,4 +1,5 @@
 ---
+# LOS:managed — this file is replaced by /update-los
 name: create-skill
 description: >
   Creates new Claude Code skills for LOS following Skills 2.0 conventions.
