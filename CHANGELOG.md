@@ -5,6 +5,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [0.3.0] - 2026-03-29
+
+### Changed
+- CLAUDE.md Skills table replaced with scan directive — skills auto-discovered from `.claude/skills/*/SKILL.md`
+- CLAUDE.md Routing replaced with scan directive — skills declare their own triggers
+- update-los no longer warns about custom CLAUDE.md entries (no longer needed)
+- update-los managed files list is now dynamic (any file with `LOS:managed` marker)
+
+---
+
 ## [0.2.0] - 2026-03-29
 
 ### Added
