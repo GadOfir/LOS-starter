@@ -1,4 +1,5 @@
 ---
+# LOS:managed — this file is replaced by /update-los
 name: learn
 description: >
   Captures and structures knowledge into memory/knowledge/.

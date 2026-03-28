@@ -1,4 +1,5 @@
 ---
+# LOS:managed — this file is replaced by /update-los
 name: task-system
 description: >
   Manages a single-task-at-a-time project workflow inside the repo.
@@ -187,7 +188,7 @@ At the start of every conversation, before anything else:
 4. If task found → read frontmatter, render briefing.
 5. Re-sync `index.md` Active pointer to match what's actually in `active/`.
 6. Load `knowledge.md` into context.
-7. **Update `## State` in CLAUDE.md** — set `Active task:` and `Last session:` to current values.
+7. **Update `# State` in `memory/identity.md`** — set `Active task:` and `Last session:` to current values.
 8. **Ask: gated or loop mode?** (unless human already specified)
 
 ### Briefing templates
@@ -472,7 +473,7 @@ Only runs on PASS or ABANDONED. Refuse on any other status.
 
 3. **Move file** — `active/task-x.md` → `done/task-x.md`
 
-4. **Update `## State` in CLAUDE.md** — set `Active task:` to empty, update `Last session:` to today's date.
+4. **Update `# State` in `memory/identity.md`** — set `Active task:` to empty, update `Last session:` to today's date.
 
 5. **Report** and offer next backlog item or "backlog empty".
 

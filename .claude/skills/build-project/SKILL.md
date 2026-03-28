@@ -1,4 +1,5 @@
 ---
+# LOS:managed — this file is replaced by /update-los
 name: build-project
 description: >
   Creates a new project in memory/projects/ with standard structure.
@@ -20,5 +21,5 @@ metadata:
    - `decisions.md`: empty with header template
 4. For code projects → init `.tasks/` using task-system skill
 5. Cross-reference `memory/knowledge/` for related topics
-6. **Update `## State` in CLAUDE.md** — append project name to `Projects:` list
+6. **Update `# State` in `memory/identity.md`** — append project name to `Projects:` list
 7. Log: `[build-project] Created: {name}`

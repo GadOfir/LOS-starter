@@ -1,4 +1,5 @@
 ---
+# LOS:managed — this file is replaced by /update-los
 name: evolve
 description: >
   Runs a full LOS system review, health check, and improvement suggestions.
@@ -24,7 +25,7 @@ metadata:
 8. Orphan files in `memory/` → flag
 9. Logs gap > 3 days → note as "dark period"
 10. Knowledge files stale > 30 days → suggest refresh
-11. `## State` in CLAUDE.md out of sync with filesystem → fix it
+11. `# State` in `memory/identity.md` out of sync with filesystem → fix it
 
 ## Part 3: Evolution
 11. Scan logs for repeated actions that aren't automated → suggest skills
@@ -49,6 +50,6 @@ Suggestions:
 ──────────────────────────────────────────────
 ```
 
-After output, update `## State` in CLAUDE.md: set `Last evolve:` to today's date.
+After output, update `# State` in `memory/identity.md`: set `Last evolve:` to today's date.
 
 Log: `[evolve] Health check — {N} issues, {N} auto-fixed`

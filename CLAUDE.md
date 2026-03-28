@@ -1,10 +1,9 @@
+<!-- LOS:managed — this file is replaced by /update-los. User data lives in memory/identity.md -->
 # Life Operating System
-
-<!-- Onboarding gate: if Identity is empty, run onboarding before anything else -->
 
 ## Onboarding
 
-> **If `## Identity` below is empty** (no name/role/goal filled in), run this
+> **If `memory/identity.md` has empty Identity fields** (no name/role/goal), run this
 > onboarding flow instead of normal routing. Once complete, skip this section forever.
 
 ### Cold-start flow
@@ -17,24 +16,14 @@ Ask three questions, one at a time:
 
 Then:
 
-1. Fill in `## Identity` with the answers
+1. Fill in Identity fields in `memory/identity.md`
 2. Create the first project in `memory/projects/` using /build-project
-3. Add that project to `## State`
+3. Add that project to State in `memory/identity.md`
 4. Write a `logs/{YYYY-MM-DD}.md` entry: `[onboarding] System initialized`
-5. Set `onboarded: true` below
+5. Set `onboarded: true` in `memory/identity.md`
 6. Print: **"You're set up. Based on your goal, I'd suggest running `/task-system` to start your first task — or just tell me what you want to work on."**
 
-`onboarded: false`
-
----
-
-## Identity
-
-<!-- Filled by onboarding. Leave blank in the template. -->
-
-- **Name:**
-- **Role:**
-- **Goal:**
+> **Always read `memory/identity.md` at session start** for user identity and current state.
 
 ---
 
@@ -47,6 +36,7 @@ Then:
 | build-project | "new project X", "build X" | Project scaffold in `memory/projects/` | daily | — |
 | evolve | "review", "status", "health check" | System health report + fixes | review | — |
 | create-skill | "create skill", "new skill", "skill for X" | New skill in `.claude/skills/` | setup | — |
+| update-los | "update", "upgrade", "check for updates" | Updated managed files + audit log | setup | — |
 
 ---
 
@@ -60,18 +50,8 @@ triggers (see table above), invoke that skill.
 - "review" / "status" → /evolve
 - "start session" / "new task" → /task-system
 - "create skill" / "new skill" / "skill for X" → /create-skill
+- "update" / "upgrade" / "check for updates" → /update-los
 - Unclear → ask what I'm trying to accomplish, then route
-
----
-
-## State
-
-<!-- Updated by skills as they run. Do not edit manually. -->
-
-- **Projects:** *(none yet — onboarding creates the first)*
-- **Last evolve:**
-- **Active task:**
-- **Last session:**
 
 ---
 
@@ -113,4 +93,4 @@ Mid-plan pauses to ask for approval are a bug, not a feature.
 - Logs gap > 3 days → note as "dark period"
 - Knowledge files stale > 30 days → suggest refresh
 - Orphan files in memory/ → flag for cleanup
-- `## State` out of sync with filesystem → fix it
+- `memory/identity.md` State out of sync with filesystem → fix it
