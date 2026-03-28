@@ -7,6 +7,10 @@ description: >
   or references to .tasks/ files and task states (IN_PROGRESS, BLOCKED, STUCK, PASS, FAIL).
   Handles full lifecycle: bootstrap → plan → build → verify → fix → learn → close.
   Supports human-gated and autonomous loop modes.
+metadata:
+  phase: daily
+  produces: Task files in .tasks/active/ and .tasks/done/
+  depends-on: []
 ---
 
 # Task System
@@ -144,7 +148,8 @@ At the start of every conversation, before anything else:
 4. If task found → read frontmatter, render briefing.
 5. Re-sync `index.md` Active pointer to match what's actually in `active/`.
 6. Load `knowledge.md` into context.
-7. **Ask: gated or loop mode?** (unless human already specified)
+7. **Update `## State` in CLAUDE.md** — set `Active task:` and `Last session:` to current values.
+8. **Ask: gated or loop mode?** (unless human already specified)
 
 ### Briefing templates
 
@@ -425,7 +430,9 @@ Only runs on PASS or ABANDONED. Refuse on any other status.
 
 3. **Move file** — `active/task-x.md` → `done/task-x.md`
 
-4. **Report** and offer next backlog item or "backlog empty".
+4. **Update `## State` in CLAUDE.md** — set `Active task:` to empty, update `Last session:` to today's date.
+
+5. **Report** and offer next backlog item or "backlog empty".
 
 ---
 

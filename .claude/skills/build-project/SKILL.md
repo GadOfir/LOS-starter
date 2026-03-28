@@ -4,6 +4,10 @@ description: >
   Creates a new project in memory/projects/ with standard structure.
   Triggers on "new project", "build X", "start project", or /build-project.
 argument-hint: "[project name]"
+metadata:
+  phase: daily
+  produces: Project scaffold in memory/projects/
+  depends-on: []
 ---
 
 # Build Project
@@ -16,4 +20,5 @@ argument-hint: "[project name]"
    - `decisions.md`: empty with header template
 4. For code projects → init `.tasks/` using task-system skill
 5. Cross-reference `memory/knowledge/` for related topics
-6. Log: `[build-project] Created: {name}`
+6. **Update `## State` in CLAUDE.md** — append project name to `Projects:` list
+7. Log: `[build-project] Created: {name}`
