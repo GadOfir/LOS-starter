@@ -401,6 +401,68 @@
       font-weight: 500;
     }
 
+    /* ---- Spotlight ---- */
+    .spotlight {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      backdrop-filter: blur(12px);
+      border-top: 3px solid var(--neon-amber);
+    }
+
+    .spotlight h3 {
+      font-family: var(--mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--neon-amber);
+      margin-bottom: 0.8rem;
+    }
+
+    .spotlight p {
+      font-size: 1.02rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .spotlight p + p { margin-top: 0.8rem; }
+
+    .spotlight .highlight { color: var(--text); font-weight: 600; }
+
+    .spotlight code {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+      border-radius: 5px;
+      font-size: 0.88rem;
+      font-family: var(--mono);
+      font-weight: 500;
+    }
+
+    .phase-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1.2rem 0;
+      font-family: var(--mono);
+      font-size: 0.88rem;
+    }
+
+    .phase {
+      padding: 0.35rem 0.8rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .phase-plan { background: var(--neon-blue-soft); color: var(--neon-blue); }
+    .phase-build { background: var(--neon-green-soft); color: var(--neon-green); }
+    .phase-verify { background: var(--neon-amber-soft); color: var(--neon-amber); }
+    .phase-fix { background: var(--neon-pink-soft); color: var(--neon-pink); }
+    .phase-learn { background: var(--neon-purple-soft); color: var(--neon-purple); }
+
+    .phase-arrow { color: var(--text-dim); font-size: 0.8rem; }
+
     /* ---- Footer ---- */
     footer {
       padding: 3.5rem 0;
@@ -529,6 +591,7 @@
         <p>You work across multiple projects. Each one starts fresh &mdash; Claude doesn't know what you decided last week, where your infra docs live, or that you prefer Postgres over Supabase.</p>
         <p><span class="highlight">LOS is one git repo that holds all of that.</span> Your projects, your knowledge, your decisions, your daily logs. It lives on GitHub, you pull it anywhere, and any project can read from it or write back to it.</p>
         <p>When you open a new project with a <code>.claude.los</code> file in it, Claude already knows who you are, what you're working on, and where everything lives. When you finish something, it logs back. <span class="highlight">Your context follows you.</span></p>
+        <p>And to be clear &mdash; LOS doesn't store your passwords or API keys. It stores <em>where they are</em>. "AWS credentials: 1Password vault". "SSH key: auth cloud/id_ed25519". The pointers, not the secrets.</p>
       </div>
 
       <div class="flow">
@@ -546,6 +609,30 @@
           <h4>project-b/</h4>
           <p>reads your context,<br>knows your stack</p>
         </div>
+      </div>
+    </section>
+
+    <!-- Task System spotlight -->
+    <section>
+      <div class="section-label" style="color: var(--neon-amber);">The engine</div>
+      <h2>Task system is the special sauce</h2>
+      <div class="spotlight">
+        <h3>/task-system</h3>
+        <p>This is what makes the whole thing evolve. The task system forces a loop: <span class="highlight">plan it, build it, verify it worked, write down what you learned.</span> Every task goes through this, and the learnings accumulate in a knowledge file that informs the next task.</p>
+        <div class="phase-flow">
+          <span class="phase phase-plan">plan</span>
+          <span class="phase-arrow">&rarr;</span>
+          <span class="phase phase-build">build</span>
+          <span class="phase-arrow">&rarr;</span>
+          <span class="phase phase-verify">verify</span>
+          <span class="phase-arrow">&rarr;</span>
+          <span class="phase phase-fix">fix</span>
+          <span class="phase-arrow">&rarr;</span>
+          <span class="phase phase-learn">learn</span>
+        </div>
+        <p>It works in <span class="highlight">gated mode</span> (you approve each step) or <span class="highlight">loop mode</span> (Claude runs autonomously &mdash; plan to build to verify to learn &mdash; and only stops when it's stuck or done). Loop mode is what lets you say "handle it" and walk away.</p>
+        <p>If verify fails, it tries to fix. If two fixes fail, it stops and waits for you. It never spins. And because every task is one file &mdash; the analysis, the plan, the work log, the test results, the learnings &mdash; you can pick up any task months later and see exactly what happened.</p>
+        <p>This works on LOS itself and on any connected project. Say "start session" in your API repo and the task system runs there, logging progress back to LOS. <span class="highlight">One workflow across all your work.</span></p>
       </div>
     </section>
 
