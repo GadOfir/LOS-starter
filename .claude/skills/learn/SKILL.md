@@ -5,6 +5,10 @@ description: >
   Triggers on "learn", "study", "research", "deep dive", "understand",
   "explain X", or when /learn is invoked.
 argument-hint: "[topic]"
+metadata:
+  phase: daily
+  produces: Knowledge files in memory/knowledge/
+  depends-on: []
 ---
 
 # Learn

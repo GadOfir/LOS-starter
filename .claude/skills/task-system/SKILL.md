@@ -7,6 +7,10 @@ description: >
   or references to .tasks/ files and task states (IN_PROGRESS, BLOCKED, STUCK, PASS, FAIL).
   Handles full lifecycle: bootstrap → plan → build → verify → fix → learn → close.
   Supports human-gated and autonomous loop modes.
+metadata:
+  phase: daily
+  produces: Task files in .tasks/active/ and .tasks/done/
+  depends-on: []
 ---
 
 # Task System
@@ -81,6 +85,44 @@ rules:
 - Human interrupts with new instruction
 - Task closes (PASS → learn → close completes)
 
+**Autonomy reminder (loop mode only):**
+Once loop mode is active, you are autonomous. Do NOT pause to ask "should I
+continue?" or "is this a good stopping point?" — the human may be away.
+Keep executing phases until STUCK, BLOCKED, or PASS. Mid-loop approval
+requests are a bug. See `## Autonomy` in CLAUDE.md for the full rules.
+
+---
+
+## Cross-repo tasks
+
+Sometimes a task is planned in one repo (for full context: memory, projects, knowledge)
+but the build work targets a different repo. This is the `target_repo` field.
+
+**Rules:**
+
+1. Planning here is fine — context from the source repo helps write better analysis and plans.
+2. When `target_repo` is set and phase transitions to `build`:
+   - STOP. Do not build in the current repo.
+   - Tell the user:
+     ```
+     ⚠ This task targets [target_repo].
+     To build, copy .tasks/active/task-NNN.md to that repo's .tasks/active/
+     and run /task-system there to pick it up.
+     Plan phase stays here. Build phase lives there.
+     ```
+   - Set status → BLOCKED, blocked_reason → "Awaiting handoff to [target_repo]"
+3. The target repo should have its own .tasks/ and task-system skill. When the
+   user runs /task-system there, it picks up the copied task file and resumes
+   from build phase.
+4. After the task is done in the target repo, the user can copy the completed
+   task back to the source repo's .tasks/done/ for knowledge extraction if desired.
+
+**Edge cases:**
+- If user says "just build it here" — respect that, clear target_repo, proceed.
+- If target repo has no task-system — advise user to set it up first, or just
+  work without task-system in the target repo (the plan is already in the file).
+- Loop mode respects this: loop STOPS at the handoff point, same as BLOCKED.
+
 ---
 
 ## Task file format
@@ -92,6 +134,7 @@ title: Short description
 status: IN_PROGRESS
 phase: plan
 mode: gated
+target_repo:
 blocked_reason:
 fix_attempts: 0
 last_updated: 2025-03-24
@@ -144,7 +187,8 @@ At the start of every conversation, before anything else:
 4. If task found → read frontmatter, render briefing.
 5. Re-sync `index.md` Active pointer to match what's actually in `active/`.
 6. Load `knowledge.md` into context.
-7. **Ask: gated or loop mode?** (unless human already specified)
+7. **Update `## State` in CLAUDE.md** — set `Active task:` and `Last session:` to current values.
+8. **Ask: gated or loop mode?** (unless human already specified)
 
 ### Briefing templates
 
@@ -323,6 +367,9 @@ direction, auto-advance to build.
 
 ## Phase: Build
 
+**Pre-check:** If `target_repo` is set in frontmatter → STOP. Do not build
+in this repo. Follow `## Cross-repo tasks` handoff rules instead.
+
 **Reads:** ## Plan, ## Work (avoid repeats), ## Fix (avoid failed approaches)
 
 **Does:**
@@ -425,7 +472,9 @@ Only runs on PASS or ABANDONED. Refuse on any other status.
 
 3. **Move file** — `active/task-x.md` → `done/task-x.md`
 
-4. **Report** and offer next backlog item or "backlog empty".
+4. **Update `## State` in CLAUDE.md** — set `Active task:` to empty, update `Last session:` to today's date.
+
+5. **Report** and offer next backlog item or "backlog empty".
 
 ---
 

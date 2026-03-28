@@ -5,6 +5,10 @@ description: >
   Triggers on "create skill", "new skill", "add skill", "make a skill",
   "skill for X", "automate X as a skill", or /create-skill.
 argument-hint: "[description of what the skill should do]"
+metadata:
+  phase: setup
+  produces: New skill directory in .claude/skills/
+  depends-on: []
 ---
 
 # Create Skill

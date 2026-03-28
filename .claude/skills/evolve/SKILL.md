@@ -3,6 +3,10 @@ name: evolve
 description: >
   Runs a full LOS system review, health check, and improvement suggestions.
   Triggers on "review", "status", "health check", "evolve", or /evolve.
+metadata:
+  phase: review
+  produces: System health report + automated fixes
+  depends-on: []
 ---
 
 # Evolve
@@ -20,6 +24,7 @@ description: >
 8. Orphan files in `memory/` → flag
 9. Logs gap > 3 days → note as "dark period"
 10. Knowledge files stale > 30 days → suggest refresh
+11. `## State` in CLAUDE.md out of sync with filesystem → fix it
 
 ## Part 3: Evolution
 11. Scan logs for repeated actions that aren't automated → suggest skills
@@ -43,5 +48,7 @@ Suggestions:
   1. [actionable thing]
 ──────────────────────────────────────────────
 ```
+
+After output, update `## State` in CLAUDE.md: set `Last evolve:` to today's date.
 
 Log: `[evolve] Health check — {N} issues, {N} auto-fixed`
