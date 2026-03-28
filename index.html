@@ -3,36 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Life Operating System — markdown-native life management powered by Claude Code">
+  <meta name="description" content="LOS — a folder of markdown files and Claude Code skills that keep your projects, notes, and tasks in one place.">
   <meta name="color-scheme" content="light dark">
   <title>LOS — Life Operating System</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #fafafa;
-      --surface: #ffffff;
-      --text: #1a1a2e;
-      --text-dim: #6b7280;
-      --accent: #6366f1;
-      --accent-soft: #eef2ff;
-      --border: #e5e7eb;
-      --code-bg: #f3f4f6;
-      --radius: 16px;
-      --glow: rgba(99, 102, 241, 0.08);
+      --bg: #0c0c14;
+      --surface: #13131f;
+      --surface-2: #1a1a2a;
+      --text: #e0e0e8;
+      --text-dim: #7a7a90;
+      --border: #252538;
+
+      --neon-blue: #60a5fa;
+      --neon-purple: #a78bfa;
+      --neon-green: #4ade80;
+      --neon-amber: #fbbf24;
+      --neon-pink: #f472b6;
+      --neon-cyan: #22d3ee;
+
+      --neon-blue-soft: rgba(96, 165, 250, 0.08);
+      --neon-purple-soft: rgba(167, 139, 250, 0.08);
+      --neon-green-soft: rgba(74, 222, 128, 0.08);
+      --neon-amber-soft: rgba(251, 191, 36, 0.08);
+      --neon-pink-soft: rgba(244, 114, 182, 0.08);
+      --neon-cyan-soft: rgba(34, 211, 238, 0.08);
+
+      --radius: 14px;
+      --mono: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
     }
 
-    @media (prefers-color-scheme: dark) {
+    @media (prefers-color-scheme: light) {
       :root {
-        --bg: #0f0f1a;
-        --surface: #1a1a2e;
-        --text: #e5e7eb;
-        --text-dim: #9ca3af;
-        --accent: #818cf8;
-        --accent-soft: rgba(99, 102, 241, 0.12);
-        --border: #2d2d44;
-        --code-bg: #16162a;
-        --glow: rgba(129, 140, 248, 0.06);
+        --bg: #f8f8fc;
+        --surface: #ffffff;
+        --surface-2: #f0f0f6;
+        --text: #1a1a2e;
+        --text-dim: #6b6b80;
+        --border: #e0e0ea;
+
+        --neon-blue-soft: rgba(96, 165, 250, 0.1);
+        --neon-purple-soft: rgba(167, 139, 250, 0.1);
+        --neon-green-soft: rgba(74, 222, 128, 0.1);
+        --neon-amber-soft: rgba(251, 191, 36, 0.1);
+        --neon-pink-soft: rgba(244, 114, 182, 0.1);
+        --neon-cyan-soft: rgba(34, 211, 238, 0.1);
       }
     }
 
@@ -41,85 +58,81 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 860px;
+    .wrap {
+      max-width: 820px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
 
-    /* --- Hero --- */
+    /* ---- Hero ---- */
     .hero {
-      padding: clamp(4rem, 12vh, 8rem) 0 3rem;
+      padding: clamp(5rem, 14vh, 9rem) 0 2.5rem;
       text-align: center;
-      animation: fadeUp 0.6s ease-out;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 0.35rem 1rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
+      animation: fadeIn 0.5s ease-out;
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
       font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1.2rem;
     }
 
-    .hero h1 span { color: var(--accent); }
+    .hero h1 .los { color: var(--neon-purple); }
 
-    .hero p {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
       color: var(--text-dim);
-      max-width: 540px;
-      margin: 0 auto 2rem;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
     }
 
-    .hero-code {
+    .terminal {
       display: inline-block;
-      background: var(--code-bg);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1rem 1.5rem;
-      font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
-      font-size: 0.95rem;
-      color: var(--text);
+      padding: 1.2rem 1.8rem;
+      font-family: var(--mono);
+      font-size: 0.9rem;
       text-align: left;
-      line-height: 1.8;
+      line-height: 2;
     }
 
-    .hero-code .dim { color: var(--text-dim); }
-    .hero-code .acc { color: var(--accent); }
+    .terminal .prompt { color: var(--neon-green); }
+    .terminal .cmd { color: var(--text); }
+    .terminal .arg { color: var(--neon-cyan); }
+    .terminal .cmt { color: var(--text-dim); }
 
-    /* --- Section --- */
-    section {
-      padding: 3rem 0;
+    /* ---- Section ---- */
+    section { padding: 3rem 0; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
     }
 
     section h2 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
     }
 
-    section > p {
+    section > .desc {
       color: var(--text-dim);
+      font-size: 0.95rem;
       margin-bottom: 2rem;
     }
 
-    /* --- Skills Grid --- */
+    /* ---- Skill Cards ---- */
     .skills {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -130,233 +143,256 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.5rem;
-      transition: box-shadow 0.2s, transform 0.2s;
-      animation: fadeUp 0.6s ease-out both;
+      padding: 1.4rem;
+      border-top: 3px solid transparent;
+      transition: transform 0.15s, box-shadow 0.15s;
+      animation: fadeUp 0.5s ease-out both;
     }
 
     .skill-card:hover {
-      box-shadow: 0 8px 30px var(--glow);
       transform: translateY(-2px);
     }
 
-    .skill-card:nth-child(2) { animation-delay: 0.08s; }
-    .skill-card:nth-child(3) { animation-delay: 0.16s; }
-    .skill-card:nth-child(4) { animation-delay: 0.24s; }
-    .skill-card:nth-child(5) { animation-delay: 0.32s; }
+    .skill-card:nth-child(1) { border-top-color: var(--neon-blue); animation-delay: 0s; }
+    .skill-card:nth-child(2) { border-top-color: var(--neon-green); animation-delay: 0.06s; }
+    .skill-card:nth-child(3) { border-top-color: var(--neon-amber); animation-delay: 0.12s; }
+    .skill-card:nth-child(4) { border-top-color: var(--neon-pink); animation-delay: 0.18s; }
+    .skill-card:nth-child(5) { border-top-color: var(--neon-cyan); animation-delay: 0.24s; }
+
+    .skill-card:nth-child(1):hover { box-shadow: 0 6px 24px rgba(96, 165, 250, 0.1); }
+    .skill-card:nth-child(2):hover { box-shadow: 0 6px 24px rgba(74, 222, 128, 0.1); }
+    .skill-card:nth-child(3):hover { box-shadow: 0 6px 24px rgba(251, 191, 36, 0.1); }
+    .skill-card:nth-child(4):hover { box-shadow: 0 6px 24px rgba(244, 114, 182, 0.1); }
+    .skill-card:nth-child(5):hover { box-shadow: 0 6px 24px rgba(34, 211, 238, 0.1); }
+
+    .skill-card:nth-child(1) .skill-name { color: var(--neon-blue); }
+    .skill-card:nth-child(2) .skill-name { color: var(--neon-green); }
+    .skill-card:nth-child(3) .skill-name { color: var(--neon-amber); }
+    .skill-card:nth-child(4) .skill-name { color: var(--neon-pink); }
+    .skill-card:nth-child(5) .skill-name { color: var(--neon-cyan); }
 
     .skill-name {
-      font-family: "SF Mono", "Cascadia Code", monospace;
-      font-size: 0.95rem;
+      font-family: var(--mono);
+      font-size: 0.9rem;
       font-weight: 600;
-      color: var(--accent);
       margin-bottom: 0.5rem;
     }
 
-    .skill-card p {
-      font-size: 0.9rem;
+    .skill-card .what {
+      font-size: 0.88rem;
       color: var(--text-dim);
       line-height: 1.5;
     }
 
-    .skill-trigger {
-      margin-top: 0.75rem;
-      font-size: 0.8rem;
+    .skill-card .try {
+      margin-top: 0.7rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
       color: var(--text-dim);
-      font-style: italic;
+      opacity: 0.7;
     }
 
-    /* --- Structure --- */
+    /* ---- Tree ---- */
     .tree {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.5rem 2rem;
-      font-family: "SF Mono", "Cascadia Code", monospace;
-      font-size: 0.85rem;
-      line-height: 2;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      line-height: 2.1;
       overflow-x: auto;
     }
 
-    .tree .folder { color: var(--accent); font-weight: 600; }
-    .tree .comment { color: var(--text-dim); }
+    .tree .f { font-weight: 600; }
+    .tree .c { color: var(--text-dim); }
+    .tree .b  { color: var(--neon-blue); }
+    .tree .g  { color: var(--neon-green); }
+    .tree .a  { color: var(--neon-amber); }
+    .tree .p  { color: var(--neon-pink); }
+    .tree .cy { color: var(--neon-cyan); }
+    .tree .pr { color: var(--neon-purple); }
 
-    /* --- How it works --- */
+    /* ---- Steps ---- */
     .steps {
       display: grid;
       gap: 1.5rem;
-      counter-reset: step;
     }
 
     .step {
       display: grid;
-      grid-template-columns: 3rem 1fr;
+      grid-template-columns: 2.8rem 1fr;
       gap: 1rem;
       align-items: start;
-      animation: fadeUp 0.5s ease-out both;
+      animation: fadeUp 0.4s ease-out both;
     }
 
-    .step:nth-child(2) { animation-delay: 0.1s; }
-    .step:nth-child(3) { animation-delay: 0.2s; }
+    .step:nth-child(1) .num { background: var(--neon-green-soft); color: var(--neon-green); }
+    .step:nth-child(2) .num { background: var(--neon-blue-soft); color: var(--neon-blue); }
+    .step:nth-child(3) .num { background: var(--neon-purple-soft); color: var(--neon-purple); }
 
-    .step-num {
-      counter-increment: step;
-      width: 3rem;
-      height: 3rem;
+    .step:nth-child(2) { animation-delay: 0.08s; }
+    .step:nth-child(3) { animation-delay: 0.16s; }
+
+    .num {
+      width: 2.8rem;
+      height: 2.8rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--accent-soft);
-      color: var(--accent);
       font-weight: 700;
-      font-size: 1.1rem;
-      border-radius: 12px;
+      font-size: 1rem;
+      border-radius: 10px;
     }
 
-    .step-num::after { content: counter(step); }
-
     .step h3 {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
     }
 
     .step p {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-dim);
     }
 
     .step code {
-      background: var(--code-bg);
-      padding: 0.15rem 0.4rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-family: "SF Mono", "Cascadia Code", monospace;
+      background: var(--surface-2);
+      padding: 0.1rem 0.35rem;
+      border-radius: 5px;
+      font-size: 0.82rem;
+      font-family: var(--mono);
     }
 
-    /* --- Principles --- */
-    .principles {
+    /* ---- Ideas ---- */
+    .ideas {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1rem;
     }
 
-    .principle {
-      padding: 1.25rem;
-      background: var(--accent-soft);
+    .idea {
+      padding: 1.2rem;
       border-radius: var(--radius);
+      border-left: 3px solid transparent;
     }
 
-    .principle h3 {
-      font-size: 0.95rem;
+    .idea:nth-child(1) { background: var(--neon-purple-soft); border-left-color: var(--neon-purple); }
+    .idea:nth-child(2) { background: var(--neon-blue-soft); border-left-color: var(--neon-blue); }
+    .idea:nth-child(3) { background: var(--neon-green-soft); border-left-color: var(--neon-green); }
+    .idea:nth-child(4) { background: var(--neon-pink-soft); border-left-color: var(--neon-pink); }
+    .idea:nth-child(5) { background: var(--neon-amber-soft); border-left-color: var(--neon-amber); }
+    .idea:nth-child(6) { background: var(--neon-cyan-soft); border-left-color: var(--neon-cyan); }
+
+    .idea h3 {
+      font-size: 0.9rem;
       font-weight: 700;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
 
-    .principle p {
-      font-size: 0.85rem;
+    .idea p {
+      font-size: 0.82rem;
       color: var(--text-dim);
       line-height: 1.5;
     }
 
-    /* --- Footer --- */
+    /* ---- Footer ---- */
     footer {
       padding: 3rem 0;
       text-align: center;
       color: var(--text-dim);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       border-top: 1px solid var(--border);
       margin-top: 2rem;
     }
 
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
+    footer a { color: var(--neon-purple); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
-    /* --- Animations --- */
+    /* ---- Animations ---- */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="wrap">
 
-    <!-- Hero -->
     <header class="hero">
-      <div class="hero-badge">SKILLS 2.0 &middot; CLAUDE CODE</div>
-      <h1>Life <span>Operating System</span></h1>
-      <p>Manage your projects, knowledge, and tasks through conversation.
-         Markdown files in, structured life out.</p>
-      <div class="hero-code">
-        <span class="dim">$</span> git clone <span class="acc">LOS-starter</span><br>
-        <span class="dim">$</span> cd LOS-starter && <span class="acc">claude</span><br>
-        <span class="dim">></span> "start session"
+      <h1><span class="los">LOS</span><br>Life Operating System</h1>
+      <p class="hero-sub">A folder of markdown files and Claude Code skills that keep your projects, notes, and tasks in one place.</p>
+      <div class="terminal">
+        <span class="prompt">$</span> <span class="cmd">git clone</span> <span class="arg">los-starter</span><br>
+        <span class="prompt">$</span> <span class="cmd">cd</span> <span class="arg">los-starter</span> <span class="cmd">&&</span> <span class="arg">claude</span><br>
+        <span class="prompt">&gt;</span> <span class="arg">"start session"</span> <span class="cmt"># that's it</span>
       </div>
     </header>
 
     <!-- Skills -->
     <section>
-      <h2>5 skills, zero config</h2>
-      <p>Each skill auto-triggers on natural phrases. Or invoke directly with /name.</p>
+      <div class="section-label" style="color: var(--neon-purple);">Skills</div>
+      <h2>What you can say</h2>
+      <p class="desc">Claude picks the right skill from how you phrase things. Or type the slash command directly.</p>
       <div class="skills">
         <div class="skill-card">
           <div class="skill-name">/learn</div>
-          <p>Captures structured knowledge — TL;DR, core concepts, gotchas, resources.</p>
-          <div class="skill-trigger">"learn kubernetes" &middot; "research OAuth"</div>
+          <p class="what">Writes a knowledge file with what matters about a topic &mdash; the short version, the tricky parts, and links worth reading.</p>
+          <div class="try">"learn oauth" &middot; "research k8s networking"</div>
         </div>
         <div class="skill-card">
           <div class="skill-name">/build-project</div>
-          <p>Registers a project with README, tasks, and decision log.</p>
-          <div class="skill-trigger">"new project my-api" &middot; "build dashboard"</div>
+          <p class="what">Creates a project folder with a readme, a task list, and a decision log. Checks if one already exists first.</p>
+          <div class="try">"new project my-api" &middot; "build dashboard"</div>
         </div>
         <div class="skill-card">
           <div class="skill-name">/task-system</div>
-          <p>One task at a time. Plan with three hats, build, verify, learn, close.</p>
-          <div class="skill-trigger">"start session" &middot; "new task"</div>
+          <p class="what">One task at a time. Three thinking passes to plan it, then build, test, and capture what you learned before closing.</p>
+          <div class="try">"start session" &middot; "new task" &middot; "what's next"</div>
         </div>
         <div class="skill-card">
           <div class="skill-name">/evolve</div>
-          <p>Health check your system — stale projects, missing files, dark periods.</p>
-          <div class="skill-trigger">"review" &middot; "status"</div>
+          <p class="what">Checks your system for problems &mdash; stale projects, missing files, gaps in your logs &mdash; and fixes what it can.</p>
+          <div class="try">"review" &middot; "status" &middot; "health check"</div>
         </div>
         <div class="skill-card">
           <div class="skill-name">/create-skill</div>
-          <p>Build new skills following Skills 2.0 conventions. The system extends itself.</p>
-          <div class="skill-trigger">"create skill for deploy" &middot; "new skill"</div>
+          <p class="what">Makes a new skill. You describe what it should do, it writes the file, wires the routing, done.</p>
+          <div class="try">"create skill for deploys" &middot; "new skill"</div>
         </div>
       </div>
     </section>
 
-    <!-- How it works -->
+    <!-- How -->
     <section>
-      <h2>How it works</h2>
-      <p>Three steps. Nothing to install beyond Claude Code.</p>
+      <div class="section-label" style="color: var(--neon-green);">Setup</div>
+      <h2>Three commands</h2>
       <div class="steps">
         <div class="step">
-          <div class="step-num"></div>
+          <div class="num">1</div>
           <div>
-            <h3>Clone and open</h3>
-            <p>Clone this repo. Run <code>claude</code> in the directory. Claude reads <code>CLAUDE.md</code> and loads all skills automatically.</p>
+            <h3>Clone it</h3>
+            <p>Grab this repo. It's just folders and markdown &mdash; nothing to install or compile.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-num"></div>
+          <div class="num">2</div>
           <div>
-            <h3>Talk naturally</h3>
-            <p>Say "learn Docker networking" or "new project my-saas". Claude routes to the right skill based on what you said.</p>
+            <h3>Run <code>claude</code></h3>
+            <p>Claude reads <code>CLAUDE.md</code> at startup and loads every skill in <code>.claude/skills/</code>. That's the whole config.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-num"></div>
+          <div class="num">3</div>
           <div>
-            <h3>Everything stays in markdown</h3>
-            <p>Knowledge, projects, tasks, decisions, logs — all plain markdown files. Version controlled. Portable. Yours.</p>
+            <h3>Just talk</h3>
+            <p>Say what you want. "learn Docker", "new project", "review". The routing table in CLAUDE.md handles the rest.</p>
           </div>
         </div>
       </div>
@@ -364,50 +400,50 @@
 
     <!-- Structure -->
     <section>
-      <h2>What's inside</h2>
-      <p>Flat, obvious, no magic.</p>
+      <div class="section-label" style="color: var(--neon-amber);">Structure</div>
+      <h2>What's in the folder</h2>
       <div class="tree">
-        <span class="folder">CLAUDE.md</span> <span class="comment">........... routing rules + system rules</span><br>
-        <span class="folder">.claude/skills/</span> <span class="comment">...... all 5 skills (Skills 2.0)</span><br>
-        <span class="folder">memory/</span><br>
-        &nbsp;&nbsp;<span class="folder">projects/</span> <span class="comment">......... one folder per project</span><br>
-        &nbsp;&nbsp;<span class="folder">knowledge/</span> <span class="comment">........ structured topic files</span><br>
-        &nbsp;&nbsp;<span class="folder">areas/</span> <span class="comment">............ career, health, etc.</span><br>
-        &nbsp;&nbsp;<span class="folder">decisions/</span> <span class="comment">........ cross-cutting choices</span><br>
-        <span class="folder">logs/</span> <span class="comment">................. daily action log</span><br>
-        <span class="folder">.tasks/</span> <span class="comment">............... created on first use</span><br>
-        <span class="folder">.claude.los</span> <span class="comment">........... copy to other repos</span>
+        <span class="f pr">CLAUDE.md</span> <span class="c">............. routing + rules</span><br>
+        <span class="f b">.claude/skills/</span> <span class="c">....... the 6 skills</span><br>
+        <span class="f g">memory/</span><br>
+        &nbsp;&nbsp;<span class="f g">projects/</span> <span class="c">............ one folder per project</span><br>
+        &nbsp;&nbsp;<span class="f g">knowledge/</span> <span class="c">........... what you've learned</span><br>
+        &nbsp;&nbsp;<span class="f g">areas/</span> <span class="c">............... career, health, whatever</span><br>
+        &nbsp;&nbsp;<span class="f g">decisions/</span> <span class="c">........... choices you've made</span><br>
+        <span class="f a">logs/</span> <span class="c">.................. one file per day</span><br>
+        <span class="f p">.tasks/</span> <span class="c">................ shows up when you start one</span><br>
+        <span class="f cy">.claude.los</span> <span class="c">............ drop into other repos</span>
       </div>
     </section>
 
-    <!-- Principles -->
+    <!-- Ideas -->
     <section>
-      <h2>Design principles</h2>
-      <p>The ideas behind the system.</p>
-      <div class="principles">
-        <div class="principle">
-          <h3>One file = one truth</h3>
-          <p>Tasks, knowledge, projects each live in a single file. Nothing scattered across docs.</p>
+      <div class="section-label" style="color: var(--neon-pink);">Ideas</div>
+      <h2>Why it works this way</h2>
+      <div class="ideas">
+        <div class="idea">
+          <h3>One file per thing</h3>
+          <p>A task is one file. A knowledge topic is one file. No scattered fragments across ten places.</p>
         </div>
-        <div class="principle">
-          <h3>Skills, not commands</h3>
-          <p>Skills 2.0 format with frontmatter, discovery, and argument hints. No legacy wrappers.</p>
+        <div class="idea">
+          <h3>Skills, not scripts</h3>
+          <p>Claude reads the skill file when it triggers. No build step, no runtime. Edit the markdown, behavior changes.</p>
         </div>
-        <div class="principle">
-          <h3>Self-healing</h3>
-          <p>/evolve detects broken indexes, missing files, and stale knowledge. Fixes what it can, flags the rest.</p>
+        <div class="idea">
+          <h3>It checks itself</h3>
+          <p>Run /evolve and it finds broken indexes, missing readmes, and gaps in your logs. Fixes what's safe to fix.</p>
         </div>
-        <div class="principle">
-          <h3>Cross-project</h3>
-          <p>Drop .claude.los into any repo. Claude logs actions back to your central LOS and pulls context when needed.</p>
+        <div class="idea">
+          <h3>Works across repos</h3>
+          <p>Copy .claude.los into another project. Claude can log back to LOS and pull context when it needs to.</p>
         </div>
-        <div class="principle">
-          <h3>Plain markdown</h3>
-          <p>No database, no app, no sync service. Git-versioned text files you own completely.</p>
+        <div class="idea">
+          <h3>Just text files</h3>
+          <p>No database. No app. No account. Markdown in a git repo. Move it, fork it, delete it.</p>
         </div>
-        <div class="principle">
-          <h3>Grows with you</h3>
-          <p>/create-skill builds new skills on demand. The system extends itself.</p>
+        <div class="idea">
+          <h3>Add what you need</h3>
+          <p>Say "create skill for X" and you get a new one. You're not waiting for a feature request to close.</p>
         </div>
       </div>
     </section>
@@ -415,10 +451,10 @@
   </div>
 
   <footer>
-    <div class="container">
+    <div class="wrap">
       <a href="https://github.com/GadOfir/LOS-starter">GitHub</a> &middot;
-      MIT License &middot;
-      Powered by <a href="https://claude.ai/code">Claude Code</a>
+      MIT &middot;
+      Built with <a href="https://claude.ai/code">Claude Code</a>
     </div>
   </footer>
 
