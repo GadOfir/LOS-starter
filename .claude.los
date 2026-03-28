@@ -1,0 +1,20 @@
+# Life Operating System Reference
+
+LOS_PATH=CHANGE_ME
+
+## What Claude can do with this:
+- Read $LOS_PATH/memory/projects/ to see all my projects
+- Read $LOS_PATH/memory/knowledge/ for accumulated knowledge
+- Read $LOS_PATH/memory/areas/ for life context (career, health, etc.)
+- Append to $LOS_PATH/logs/{YYYY-MM-DD}.md to log cross-project actions
+  Format: [{this-project-name}] {action}: {details}
+
+## When to use:
+- A skill or command needs context about me or my other projects
+- This project relates to something tracked in LOS
+- A task completes or fails and should be logged centrally
+
+## Do NOT:
+- Write to LOS memory/projects/ from another project (only append to logs/)
+- Duplicate LOS knowledge into this project's context
+- Read LOS files on every message — only when context is actually needed
