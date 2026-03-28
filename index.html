@@ -277,37 +277,128 @@
       font-weight: 500;
     }
 
-    /* ---- Ideas ---- */
-    .ideas {
+    /* ---- The Point ---- */
+    .point {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      backdrop-filter: blur(12px);
+      margin-bottom: 2.5rem;
+    }
+
+    .point h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .point p {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .point p + p { margin-top: 0.8rem; }
+
+    .point .highlight {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ---- Flow diagram ---- */
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0;
+      align-items: center;
+      margin: 2.5rem 0;
+    }
+
+    .flow-node {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+
+    .flow-node h4 {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .flow-node p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .flow-arrow {
+      font-size: 1.4rem;
+      color: var(--text-dim);
+      text-align: center;
+      padding: 0 0.4rem;
+    }
+
+    .flow-node:nth-child(1) { border-top: 3px solid var(--neon-cyan); }
+    .flow-node:nth-child(1) h4 { color: var(--neon-cyan); }
+    .flow-node:nth-child(3) { border-top: 3px solid var(--neon-purple); }
+    .flow-node:nth-child(3) h4 { color: var(--neon-purple); }
+    .flow-node:nth-child(5) { border-top: 3px solid var(--neon-green); }
+    .flow-node:nth-child(5) h4 { color: var(--neon-green); }
+
+    @media (max-width: 640px) {
+      .flow {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .flow-arrow { transform: rotate(90deg); padding: 0.3rem 0; }
+    }
+
+    /* ---- Cases ---- */
+    .cases {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.2rem;
     }
 
-    .idea {
-      padding: 1.4rem 1.5rem;
+    .case {
+      padding: 1.5rem;
       border-radius: var(--radius);
       border-left: 3px solid transparent;
       backdrop-filter: blur(8px);
     }
 
-    .idea:nth-child(1) { background: var(--neon-purple-soft); border-left-color: var(--neon-purple); }
-    .idea:nth-child(2) { background: var(--neon-blue-soft); border-left-color: var(--neon-blue); }
-    .idea:nth-child(3) { background: var(--neon-green-soft); border-left-color: var(--neon-green); }
-    .idea:nth-child(4) { background: var(--neon-pink-soft); border-left-color: var(--neon-pink); }
-    .idea:nth-child(5) { background: var(--neon-amber-soft); border-left-color: var(--neon-amber); }
-    .idea:nth-child(6) { background: var(--neon-cyan-soft); border-left-color: var(--neon-cyan); }
+    .case:nth-child(1) { background: var(--neon-blue-soft); border-left-color: var(--neon-blue); }
+    .case:nth-child(2) { background: var(--neon-green-soft); border-left-color: var(--neon-green); }
+    .case:nth-child(3) { background: var(--neon-amber-soft); border-left-color: var(--neon-amber); }
+    .case:nth-child(4) { background: var(--neon-pink-soft); border-left-color: var(--neon-pink); }
+    .case:nth-child(5) { background: var(--neon-purple-soft); border-left-color: var(--neon-purple); }
+    .case:nth-child(6) { background: var(--neon-cyan-soft); border-left-color: var(--neon-cyan); }
 
-    .idea h3 {
-      font-size: 1.05rem;
+    .case h3 {
+      font-size: 1rem;
       font-weight: 700;
       margin-bottom: 0.35rem;
     }
 
-    .idea p {
+    .case p {
       font-size: 0.92rem;
       color: var(--text-mid);
       line-height: 1.6;
+    }
+
+    .case code {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+      border-radius: 5px;
+      font-size: 0.82rem;
+      font-family: var(--mono);
+      font-weight: 500;
     }
 
     /* ---- Footer ---- */
@@ -341,11 +432,11 @@
 
     <header class="hero">
       <h1><span class="los">LOS</span><br>Life Operating System</h1>
-      <p class="hero-sub">A folder of markdown files and Claude Code skills that keep your projects, notes, and tasks in one place.</p>
+      <p class="hero-sub">One repo that remembers everything &mdash; your projects, your rules, your decisions, what you've learned. Clone it, connect it to any project, and Claude knows who you are and where things live.</p>
       <div class="terminal">
-        <span class="prompt">$</span> <span class="cmd">git clone</span> <span class="arg">los-starter</span><br>
-        <span class="prompt">$</span> <span class="cmd">cd</span> <span class="arg">los-starter</span> <span class="cmd">&&</span> <span class="arg">claude</span><br>
-        <span class="prompt">&gt;</span> <span class="arg">"start session"</span> <span class="cmt"># that's it</span>
+        <span class="prompt">$</span> <span class="cmd">git clone</span> <span class="arg">los-starter</span> <span class="cmt"># your persistent brain</span><br>
+        <span class="prompt">$</span> <span class="cmd">cd</span> <span class="arg">any-project</span> <span class="cmd">&&</span> <span class="arg">claude</span><br>
+        <span class="prompt">&gt;</span> <span class="arg">"learn terraform"</span> <span class="cmt"># saved to LOS, available everywhere</span>
       </div>
     </header>
 
@@ -430,34 +521,62 @@
       </div>
     </section>
 
-    <!-- Ideas -->
+    <!-- The Point -->
     <section>
-      <div class="section-label" style="color: var(--neon-pink);">Ideas</div>
-      <h2>Why it works this way</h2>
-      <div class="ideas">
-        <div class="idea">
-          <h3>Everything in one place</h3>
-          <p>A task doesn't end up in Notion while its notes live in Google Docs and the decision is buried in Slack. One folder. One system.</p>
+      <div class="section-label" style="color: var(--neon-purple);">The point</div>
+      <h2>A repo that knows you</h2>
+      <div class="point">
+        <p>You work across multiple projects. Each one starts fresh &mdash; Claude doesn't know what you decided last week, where your infra docs live, or that you prefer Postgres over Supabase.</p>
+        <p><span class="highlight">LOS is one git repo that holds all of that.</span> Your projects, your knowledge, your decisions, your daily logs. It lives on GitHub, you pull it anywhere, and any project can read from it or write back to it.</p>
+        <p>When you open a new project with a <code>.claude.los</code> file in it, Claude already knows who you are, what you're working on, and where everything lives. When you finish something, it logs back. <span class="highlight">Your context follows you.</span></p>
+      </div>
+
+      <div class="flow">
+        <div class="flow-node">
+          <h4>project-a/</h4>
+          <p>finishes a deploy,<br>logs it to LOS</p>
         </div>
-        <div class="idea">
-          <h3>Behavior lives in markdown</h3>
-          <p>Each skill is a markdown file that tells Claude what to do. Change the file, change the behavior. No code, no deploy.</p>
+        <div class="flow-arrow">&harr;</div>
+        <div class="flow-node">
+          <h4>LOS</h4>
+          <p>stores everything,<br>holds your rules</p>
         </div>
-        <div class="idea">
-          <h3>Catches your blind spots</h3>
-          <p>/evolve notices things you forgot &mdash; a project with no readme, three days with no log entry, a knowledge file that's gone stale.</p>
+        <div class="flow-arrow">&harr;</div>
+        <div class="flow-node">
+          <h4>project-b/</h4>
+          <p>reads your context,<br>knows your stack</p>
         </div>
-        <div class="idea">
-          <h3>Connects your repos</h3>
-          <p>Drop .claude.los into a project and Claude knows about your other work. Finish a deploy, it logs back to LOS automatically.</p>
+      </div>
+    </section>
+
+    <!-- Use cases -->
+    <section>
+      <div class="section-label" style="color: var(--neon-pink);">When you'd use this</div>
+      <h2>Real situations</h2>
+      <div class="cases">
+        <div class="case">
+          <h3>Starting a new project</h3>
+          <p>Say "new project my-api" and LOS creates a folder with a readme, task list, and decision log. Next time you ask "what am I working on?", it knows.</p>
         </div>
-        <div class="idea">
-          <h3>You own all of it</h3>
-          <p>No account. No sync service. No vendor lock-in. It's markdown in a git repo. If you stop using it, the files are still readable.</p>
+        <div class="case">
+          <h3>Switching between repos</h3>
+          <p>You have 5 projects. Each one has <code>.claude.los</code> in it. Claude reads your LOS to understand what you decided in the other ones.</p>
         </div>
-        <div class="idea">
-          <h3>Grows by talking</h3>
-          <p>Need a skill that doesn't exist? Describe it. Claude writes the skill file, wires it up, and it works next time you ask.</p>
+        <div class="case">
+          <h3>Learning something new</h3>
+          <p>Say "learn Terraform modules" and it writes a knowledge file. Three months later in a different project, that knowledge is still there.</p>
+        </div>
+        <div class="case">
+          <h3>Picking up after a break</h3>
+          <p>You haven't touched a project in two weeks. Run /evolve and it tells you what's stale, what's active, and what you left unfinished.</p>
+        </div>
+        <div class="case">
+          <h3>Working with a partner</h3>
+          <p>Two people, same LOS repo. Your decisions, task history, and project status are shared. No "where did we leave off?" conversations.</p>
+        </div>
+        <div class="case">
+          <h3>Building your own workflow</h3>
+          <p>Say "create skill for code review" and Claude writes a new skill file. Your LOS gets a new capability that works in every project.</p>
         </div>
       </div>
     </section>
