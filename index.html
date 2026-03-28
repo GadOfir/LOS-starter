@@ -6,152 +6,164 @@
   <meta name="description" content="LOS — a folder of markdown files and Claude Code skills that keep your projects, notes, and tasks in one place.">
   <meta name="color-scheme" content="light dark">
   <title>LOS — Life Operating System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0c0c14;
-      --surface: #13131f;
-      --surface-2: #1a1a2a;
-      --text: #e0e0e8;
-      --text-dim: #7a7a90;
-      --border: #252538;
+      --bg: #0a0e1a;
+      --surface: rgba(15, 22, 40, 0.85);
+      --surface-solid: #0f1628;
+      --text: #e8ecf4;
+      --text-mid: #9aa3b8;
+      --text-dim: #5a6478;
+      --border: #1e2a42;
+      --grid-line: rgba(56, 120, 240, 0.06);
+      --grid-line-strong: rgba(56, 120, 240, 0.12);
 
-      --neon-blue: #60a5fa;
+      --neon-blue: #5b9ef5;
       --neon-purple: #a78bfa;
-      --neon-green: #4ade80;
-      --neon-amber: #fbbf24;
+      --neon-green: #34d399;
+      --neon-amber: #f5b942;
       --neon-pink: #f472b6;
       --neon-cyan: #22d3ee;
 
-      --neon-blue-soft: rgba(96, 165, 250, 0.08);
-      --neon-purple-soft: rgba(167, 139, 250, 0.08);
-      --neon-green-soft: rgba(74, 222, 128, 0.08);
-      --neon-amber-soft: rgba(251, 191, 36, 0.08);
-      --neon-pink-soft: rgba(244, 114, 182, 0.08);
-      --neon-cyan-soft: rgba(34, 211, 238, 0.08);
+      --neon-blue-soft: rgba(91, 158, 245, 0.1);
+      --neon-purple-soft: rgba(167, 139, 250, 0.1);
+      --neon-green-soft: rgba(52, 211, 153, 0.1);
+      --neon-amber-soft: rgba(245, 185, 66, 0.1);
+      --neon-pink-soft: rgba(244, 114, 182, 0.1);
+      --neon-cyan-soft: rgba(34, 211, 238, 0.1);
 
       --radius: 14px;
-      --mono: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
-    }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8f8fc;
-        --surface: #ffffff;
-        --surface-2: #f0f0f6;
-        --text: #1a1a2e;
-        --text-dim: #6b6b80;
-        --border: #e0e0ea;
-
-        --neon-blue-soft: rgba(96, 165, 250, 0.1);
-        --neon-purple-soft: rgba(167, 139, 250, 0.1);
-        --neon-green-soft: rgba(74, 222, 128, 0.1);
-        --neon-amber-soft: rgba(251, 191, 36, 0.1);
-        --neon-pink-soft: rgba(244, 114, 182, 0.1);
-        --neon-cyan-soft: rgba(34, 211, 238, 0.1);
-      }
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --mono: "JetBrains Mono", "SF Mono", "Cascadia Code", Consolas, monospace;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-family: var(--sans);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+
+      /* Blueprint grid */
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(var(--grid-line-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line-strong) 1px, transparent 1px);
+      background-size:
+        20px 20px,
+        20px 20px,
+        100px 100px,
+        100px 100px;
+      background-position: center center;
     }
 
     .wrap {
-      max-width: 820px;
+      max-width: 880px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 2rem;
     }
 
     /* ---- Hero ---- */
     .hero {
-      padding: clamp(5rem, 14vh, 9rem) 0 2.5rem;
+      padding: clamp(5rem, 15vh, 10rem) 0 4rem;
       text-align: center;
-      animation: fadeIn 0.5s ease-out;
+      animation: fadeIn 0.6s ease-out;
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      margin-bottom: 1.2rem;
+      font-family: var(--sans);
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
     }
 
-    .hero h1 .los { color: var(--neon-purple); }
+    .hero h1 .los {
+      color: var(--neon-purple);
+      text-shadow: 0 0 40px rgba(167, 139, 250, 0.3);
+    }
 
     .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.15rem);
-      color: var(--text-dim);
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: var(--text-mid);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      font-weight: 400;
+      line-height: 1.6;
     }
 
     .terminal {
       display: inline-block;
-      background: var(--surface);
+      background: var(--surface-solid);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.2rem 1.8rem;
+      padding: 1.4rem 2rem;
       font-family: var(--mono);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       text-align: left;
-      line-height: 2;
+      line-height: 2.2;
+      backdrop-filter: blur(12px);
     }
 
-    .terminal .prompt { color: var(--neon-green); }
+    .terminal .prompt { color: var(--neon-green); font-weight: 600; }
     .terminal .cmd { color: var(--text); }
     .terminal .arg { color: var(--neon-cyan); }
     .terminal .cmt { color: var(--text-dim); }
 
     /* ---- Section ---- */
-    section { padding: 3rem 0; }
+    section { padding: 3.5rem 0; }
 
     .section-label {
       font-family: var(--mono);
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
     section h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.3rem;
+      font-family: var(--sans);
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
     }
 
     section > .desc {
-      color: var(--text-dim);
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
     }
 
     /* ---- Skill Cards ---- */
     .skills {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
     }
 
     .skill-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.4rem;
+      padding: 1.6rem;
       border-top: 3px solid transparent;
       transition: transform 0.15s, box-shadow 0.15s;
       animation: fadeUp 0.5s ease-out both;
+      backdrop-filter: blur(12px);
     }
 
-    .skill-card:hover {
-      transform: translateY(-2px);
-    }
+    .skill-card:hover { transform: translateY(-3px); }
 
     .skill-card:nth-child(1) { border-top-color: var(--neon-blue); animation-delay: 0s; }
     .skill-card:nth-child(2) { border-top-color: var(--neon-green); animation-delay: 0.06s; }
@@ -159,11 +171,11 @@
     .skill-card:nth-child(4) { border-top-color: var(--neon-pink); animation-delay: 0.18s; }
     .skill-card:nth-child(5) { border-top-color: var(--neon-cyan); animation-delay: 0.24s; }
 
-    .skill-card:nth-child(1):hover { box-shadow: 0 6px 24px rgba(96, 165, 250, 0.1); }
-    .skill-card:nth-child(2):hover { box-shadow: 0 6px 24px rgba(74, 222, 128, 0.1); }
-    .skill-card:nth-child(3):hover { box-shadow: 0 6px 24px rgba(251, 191, 36, 0.1); }
-    .skill-card:nth-child(4):hover { box-shadow: 0 6px 24px rgba(244, 114, 182, 0.1); }
-    .skill-card:nth-child(5):hover { box-shadow: 0 6px 24px rgba(34, 211, 238, 0.1); }
+    .skill-card:nth-child(1):hover { box-shadow: 0 8px 32px rgba(91, 158, 245, 0.15); }
+    .skill-card:nth-child(2):hover { box-shadow: 0 8px 32px rgba(52, 211, 153, 0.15); }
+    .skill-card:nth-child(3):hover { box-shadow: 0 8px 32px rgba(245, 185, 66, 0.15); }
+    .skill-card:nth-child(4):hover { box-shadow: 0 8px 32px rgba(244, 114, 182, 0.15); }
+    .skill-card:nth-child(5):hover { box-shadow: 0 8px 32px rgba(34, 211, 238, 0.15); }
 
     .skill-card:nth-child(1) .skill-name { color: var(--neon-blue); }
     .skill-card:nth-child(2) .skill-name { color: var(--neon-green); }
@@ -173,23 +185,22 @@
 
     .skill-name {
       font-family: var(--mono);
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
     }
 
     .skill-card .what {
-      font-size: 0.88rem;
-      color: var(--text-dim);
-      line-height: 1.5;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.6;
     }
 
     .skill-card .try {
-      margin-top: 0.7rem;
+      margin-top: 0.9rem;
       font-family: var(--mono);
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: var(--text-dim);
-      opacity: 0.7;
     }
 
     /* ---- Tree ---- */
@@ -197,15 +208,16 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.5rem 2rem;
+      padding: 2rem 2.5rem;
       font-family: var(--mono);
-      font-size: 0.82rem;
-      line-height: 2.1;
+      font-size: 0.92rem;
+      line-height: 2.3;
       overflow-x: auto;
+      backdrop-filter: blur(12px);
     }
 
-    .tree .f { font-weight: 600; }
-    .tree .c { color: var(--text-dim); }
+    .tree .f { font-weight: 700; }
+    .tree .c { color: var(--text-dim); font-weight: 400; }
     .tree .b  { color: var(--neon-blue); }
     .tree .g  { color: var(--neon-green); }
     .tree .a  { color: var(--neon-amber); }
@@ -214,67 +226,69 @@
     .tree .pr { color: var(--neon-purple); }
 
     /* ---- Steps ---- */
-    .steps {
-      display: grid;
-      gap: 1.5rem;
-    }
+    .steps { display: grid; gap: 2rem; }
 
     .step {
       display: grid;
-      grid-template-columns: 2.8rem 1fr;
-      gap: 1rem;
+      grid-template-columns: 3.2rem 1fr;
+      gap: 1.2rem;
       align-items: start;
       animation: fadeUp 0.4s ease-out both;
     }
 
-    .step:nth-child(1) .num { background: var(--neon-green-soft); color: var(--neon-green); }
-    .step:nth-child(2) .num { background: var(--neon-blue-soft); color: var(--neon-blue); }
-    .step:nth-child(3) .num { background: var(--neon-purple-soft); color: var(--neon-purple); }
+    .step:nth-child(1) .num { background: var(--neon-green-soft); color: var(--neon-green); border: 1px solid rgba(52, 211, 153, 0.2); }
+    .step:nth-child(2) .num { background: var(--neon-blue-soft); color: var(--neon-blue); border: 1px solid rgba(91, 158, 245, 0.2); }
+    .step:nth-child(3) .num { background: var(--neon-purple-soft); color: var(--neon-purple); border: 1px solid rgba(167, 139, 250, 0.2); }
 
     .step:nth-child(2) { animation-delay: 0.08s; }
     .step:nth-child(3) { animation-delay: 0.16s; }
 
     .num {
-      width: 2.8rem;
-      height: 2.8rem;
+      width: 3.2rem;
+      height: 3.2rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: var(--mono);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 1.1rem;
       border-radius: 10px;
     }
 
     .step h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.15rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
     }
 
     .step p {
-      font-size: 0.88rem;
-      color: var(--text-dim);
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.6;
     }
 
     .step code {
-      background: var(--surface-2);
-      padding: 0.1rem 0.35rem;
-      border-radius: 5px;
-      font-size: 0.82rem;
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
       font-family: var(--mono);
+      font-weight: 500;
     }
 
     /* ---- Ideas ---- */
     .ideas {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
     }
 
     .idea {
-      padding: 1.2rem;
+      padding: 1.4rem 1.5rem;
       border-radius: var(--radius);
       border-left: 3px solid transparent;
+      backdrop-filter: blur(8px);
     }
 
     .idea:nth-child(1) { background: var(--neon-purple-soft); border-left-color: var(--neon-purple); }
@@ -285,28 +299,28 @@
     .idea:nth-child(6) { background: var(--neon-cyan-soft); border-left-color: var(--neon-cyan); }
 
     .idea h3 {
-      font-size: 0.9rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.35rem;
     }
 
     .idea p {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      line-height: 1.5;
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.6;
     }
 
     /* ---- Footer ---- */
     footer {
-      padding: 3rem 0;
+      padding: 3.5rem 0;
       text-align: center;
       color: var(--text-dim);
-      font-size: 0.82rem;
+      font-size: 0.9rem;
       border-top: 1px solid var(--border);
-      margin-top: 2rem;
+      margin-top: 3rem;
     }
 
-    footer a { color: var(--neon-purple); text-decoration: none; }
+    footer a { color: var(--neon-purple); text-decoration: none; font-weight: 500; }
     footer a:hover { text-decoration: underline; }
 
     /* ---- Animations ---- */
@@ -316,7 +330,7 @@
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
   </style>
