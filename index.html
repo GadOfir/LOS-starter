@@ -357,7 +357,7 @@
       <div class="skills">
         <div class="skill-card">
           <div class="skill-name">/learn</div>
-          <p class="what">Writes a knowledge file with what matters about a topic &mdash; the short version, the tricky parts, and links worth reading.</p>
+          <p class="what">Say "learn OAuth" and you get a file in memory/knowledge/ with the core ideas, the parts that trip people up, and links that are actually worth reading.</p>
           <div class="try">"learn oauth" &middot; "research k8s networking"</div>
         </div>
         <div class="skill-card">
@@ -367,7 +367,7 @@
         </div>
         <div class="skill-card">
           <div class="skill-name">/task-system</div>
-          <p class="what">One task at a time. Three thinking passes to plan it, then build, test, and capture what you learned before closing.</p>
+          <p class="what">Picks one task, plans it from three angles (analyst, architect, PM), builds it, verifies it works, and writes down what you learned before archiving.</p>
           <div class="try">"start session" &middot; "new task" &middot; "what's next"</div>
         </div>
         <div class="skill-card">
@@ -377,7 +377,7 @@
         </div>
         <div class="skill-card">
           <div class="skill-name">/create-skill</div>
-          <p class="what">Makes a new skill. You describe what it should do, it writes the file, wires the routing, done.</p>
+          <p class="what">Describe what you want automated. Claude writes the skill file, adds routing to CLAUDE.md, and it works on the next message.</p>
           <div class="try">"create skill for deploys" &middot; "new skill"</div>
         </div>
       </div>
@@ -436,28 +436,28 @@
       <h2>Why it works this way</h2>
       <div class="ideas">
         <div class="idea">
-          <h3>One file per thing</h3>
-          <p>A task is one file. A knowledge topic is one file. No scattered fragments across ten places.</p>
+          <h3>Everything in one place</h3>
+          <p>A task doesn't end up in Notion while its notes live in Google Docs and the decision is buried in Slack. One folder. One system.</p>
         </div>
         <div class="idea">
-          <h3>Skills, not scripts</h3>
-          <p>Claude reads the skill file when it triggers. No build step, no runtime. Edit the markdown, behavior changes.</p>
+          <h3>Behavior lives in markdown</h3>
+          <p>Each skill is a markdown file that tells Claude what to do. Change the file, change the behavior. No code, no deploy.</p>
         </div>
         <div class="idea">
-          <h3>It checks itself</h3>
-          <p>Run /evolve and it finds broken indexes, missing readmes, and gaps in your logs. Fixes what's safe to fix.</p>
+          <h3>Catches your blind spots</h3>
+          <p>/evolve notices things you forgot &mdash; a project with no readme, three days with no log entry, a knowledge file that's gone stale.</p>
         </div>
         <div class="idea">
-          <h3>Works across repos</h3>
-          <p>Copy .claude.los into another project. Claude can log back to LOS and pull context when it needs to.</p>
+          <h3>Connects your repos</h3>
+          <p>Drop .claude.los into a project and Claude knows about your other work. Finish a deploy, it logs back to LOS automatically.</p>
         </div>
         <div class="idea">
-          <h3>Just text files</h3>
-          <p>No database. No app. No account. Markdown in a git repo. Move it, fork it, delete it.</p>
+          <h3>You own all of it</h3>
+          <p>No account. No sync service. No vendor lock-in. It's markdown in a git repo. If you stop using it, the files are still readable.</p>
         </div>
         <div class="idea">
-          <h3>Add what you need</h3>
-          <p>Say "create skill for X" and you get a new one. You're not waiting for a feature request to close.</p>
+          <h3>Grows by talking</h3>
+          <p>Need a skill that doesn't exist? Describe it. Claude writes the skill file, wires it up, and it works next time you ask.</p>
         </div>
       </div>
     </section>
