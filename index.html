@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Life Operating System — markdown-native life management powered by Claude Code">
+  <meta name="color-scheme" content="light dark">
+  <title>LOS — Life Operating System</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #1a1a2e;
+      --text-dim: #6b7280;
+      --accent: #6366f1;
+      --accent-soft: #eef2ff;
+      --border: #e5e7eb;
+      --code-bg: #f3f4f6;
+      --radius: 16px;
+      --glow: rgba(99, 102, 241, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0f1a;
+        --surface: #1a1a2e;
+        --text: #e5e7eb;
+        --text-dim: #9ca3af;
+        --accent: #818cf8;
+        --accent-soft: rgba(99, 102, 241, 0.12);
+        --border: #2d2d44;
+        --code-bg: #16162a;
+        --glow: rgba(129, 140, 248, 0.06);
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* --- Hero --- */
+    .hero {
+      padding: clamp(4rem, 12vh, 8rem) 0 3rem;
+      text-align: center;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-dim);
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-code {
+      display: inline-block;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+      font-size: 0.95rem;
+      color: var(--text);
+      text-align: left;
+      line-height: 1.8;
+    }
+
+    .hero-code .dim { color: var(--text-dim); }
+    .hero-code .acc { color: var(--accent); }
+
+    /* --- Section --- */
+    section {
+      padding: 3rem 0;
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    section > p {
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+
+    /* --- Skills Grid --- */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      animation: fadeUp 0.6s ease-out both;
+    }
+
+    .skill-card:hover {
+      box-shadow: 0 8px 30px var(--glow);
+      transform: translateY(-2px);
+    }
+
+    .skill-card:nth-child(2) { animation-delay: 0.08s; }
+    .skill-card:nth-child(3) { animation-delay: 0.16s; }
+    .skill-card:nth-child(4) { animation-delay: 0.24s; }
+    .skill-card:nth-child(5) { animation-delay: 0.32s; }
+
+    .skill-name {
+      font-family: "SF Mono", "Cascadia Code", monospace;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .skill-trigger {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* --- Structure --- */
+    .tree {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      font-family: "SF Mono", "Cascadia Code", monospace;
+      font-size: 0.85rem;
+      line-height: 2;
+      overflow-x: auto;
+    }
+
+    .tree .folder { color: var(--accent); font-weight: 600; }
+    .tree .comment { color: var(--text-dim); }
+
+    /* --- How it works --- */
+    .steps {
+      display: grid;
+      gap: 1.5rem;
+      counter-reset: step;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      animation: fadeUp 0.5s ease-out both;
+    }
+
+    .step:nth-child(2) { animation-delay: 0.1s; }
+    .step:nth-child(3) { animation-delay: 0.2s; }
+
+    .step-num {
+      counter-increment: step;
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 12px;
+    }
+
+    .step-num::after { content: counter(step); }
+
+    .step h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .step code {
+      background: var(--code-bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: "SF Mono", "Cascadia Code", monospace;
+    }
+
+    /* --- Principles --- */
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .principle {
+      padding: 1.25rem;
+      background: var(--accent-soft);
+      border-radius: var(--radius);
+    }
+
+    .principle h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .principle p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* --- Footer --- */
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* --- Animations --- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-badge">SKILLS 2.0 &middot; CLAUDE CODE</div>
+      <h1>Life <span>Operating System</span></h1>
+      <p>Manage your projects, knowledge, and tasks through conversation.
+         Markdown files in, structured life out.</p>
+      <div class="hero-code">
+        <span class="dim">$</span> git clone <span class="acc">LOS-starter</span><br>
+        <span class="dim">$</span> cd LOS-starter && <span class="acc">claude</span><br>
+        <span class="dim">></span> "start session"
+      </div>
+    </header>
+
+    <!-- Skills -->
+    <section>
+      <h2>5 skills, zero config</h2>
+      <p>Each skill auto-triggers on natural phrases. Or invoke directly with /name.</p>
+      <div class="skills">
+        <div class="skill-card">
+          <div class="skill-name">/learn</div>
+          <p>Captures structured knowledge — TL;DR, core concepts, gotchas, resources.</p>
+          <div class="skill-trigger">"learn kubernetes" &middot; "research OAuth"</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/build-project</div>
+          <p>Registers a project with README, tasks, and decision log.</p>
+          <div class="skill-trigger">"new project my-api" &middot; "build dashboard"</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/task-system</div>
+          <p>One task at a time. Plan with three hats, build, verify, learn, close.</p>
+          <div class="skill-trigger">"start session" &middot; "new task"</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/evolve</div>
+          <p>Health check your system — stale projects, missing files, dark periods.</p>
+          <div class="skill-trigger">"review" &middot; "status"</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/create-skill</div>
+          <p>Build new skills following Skills 2.0 conventions. The system extends itself.</p>
+          <div class="skill-trigger">"create skill for deploy" &middot; "new skill"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section>
+      <h2>How it works</h2>
+      <p>Three steps. Nothing to install beyond Claude Code.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num"></div>
+          <div>
+            <h3>Clone and open</h3>
+            <p>Clone this repo. Run <code>claude</code> in the directory. Claude reads <code>CLAUDE.md</code> and loads all skills automatically.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div>
+            <h3>Talk naturally</h3>
+            <p>Say "learn Docker networking" or "new project my-saas". Claude routes to the right skill based on what you said.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <div>
+            <h3>Everything stays in markdown</h3>
+            <p>Knowledge, projects, tasks, decisions, logs — all plain markdown files. Version controlled. Portable. Yours.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Structure -->
+    <section>
+      <h2>What's inside</h2>
+      <p>Flat, obvious, no magic.</p>
+      <div class="tree">
+        <span class="folder">CLAUDE.md</span> <span class="comment">........... routing rules + system rules</span><br>
+        <span class="folder">.claude/skills/</span> <span class="comment">...... all 5 skills (Skills 2.0)</span><br>
+        <span class="folder">memory/</span><br>
+        &nbsp;&nbsp;<span class="folder">projects/</span> <span class="comment">......... one folder per project</span><br>
+        &nbsp;&nbsp;<span class="folder">knowledge/</span> <span class="comment">........ structured topic files</span><br>
+        &nbsp;&nbsp;<span class="folder">areas/</span> <span class="comment">............ career, health, etc.</span><br>
+        &nbsp;&nbsp;<span class="folder">decisions/</span> <span class="comment">........ cross-cutting choices</span><br>
+        <span class="folder">logs/</span> <span class="comment">................. daily action log</span><br>
+        <span class="folder">.tasks/</span> <span class="comment">............... created on first use</span><br>
+        <span class="folder">.claude.los</span> <span class="comment">........... copy to other repos</span>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <section>
+      <h2>Design principles</h2>
+      <p>The ideas behind the system.</p>
+      <div class="principles">
+        <div class="principle">
+          <h3>One file = one truth</h3>
+          <p>Tasks, knowledge, projects each live in a single file. Nothing scattered across docs.</p>
+        </div>
+        <div class="principle">
+          <h3>Skills, not commands</h3>
+          <p>Skills 2.0 format with frontmatter, discovery, and argument hints. No legacy wrappers.</p>
+        </div>
+        <div class="principle">
+          <h3>Self-healing</h3>
+          <p>/evolve detects broken indexes, missing files, and stale knowledge. Fixes what it can, flags the rest.</p>
+        </div>
+        <div class="principle">
+          <h3>Cross-project</h3>
+          <p>Drop .claude.los into any repo. Claude logs actions back to your central LOS and pulls context when needed.</p>
+        </div>
+        <div class="principle">
+          <h3>Plain markdown</h3>
+          <p>No database, no app, no sync service. Git-versioned text files you own completely.</p>
+        </div>
+        <div class="principle">
+          <h3>Grows with you</h3>
+          <p>/create-skill builds new skills on demand. The system extends itself.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <a href="https://github.com/GadOfir/LOS-starter">GitHub</a> &middot;
+      MIT License &middot;
+      Powered by <a href="https://claude.ai/code">Claude Code</a>
+    </div>
+  </footer>
+
+</body>
+</html>
