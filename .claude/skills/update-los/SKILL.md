@@ -27,19 +27,9 @@ LOS instance. Preserves all user data (memory, tasks, logs, identity).
 
 ## What gets updated (managed files)
 
-Only files containing `LOS:managed` in their first 5 lines are eligible for update.
-Currently:
-
-| File | Description |
-|------|-------------|
-| `CLAUDE.md` | System structure, routing, rules |
-| `.claude/skills/task-system/SKILL.md` | Task lifecycle |
-| `.claude/skills/learn/SKILL.md` | Knowledge capture |
-| `.claude/skills/build-project/SKILL.md` | Project scaffolding |
-| `.claude/skills/evolve/SKILL.md` | System health |
-| `.claude/skills/create-skill/SKILL.md` | Skill authoring |
-| `.claude/skills/update-los/SKILL.md` | This skill |
-| `VERSION` | Version number |
+Any file containing `LOS:managed` in its first 5 lines is eligible for update.
+This includes `CLAUDE.md`, `VERSION`, and any skill SKILL.md that has the marker.
+User-created skills won't have this marker, so they're never touched.
 
 ---
 
@@ -117,30 +107,17 @@ If all true → run migration. If `VERSION` exists → skip to regular update fl
 
 4. **Create `VERSION` file** with upstream version.
 
-5. **Preserve custom CLAUDE.md entries** — if the old CLAUDE.md had custom
-   skills in the Skills table or Routing that aren't in the template (e.g.,
-   `design-html`), warn the user:
-   ```
-   ⚠ Custom entries found in old CLAUDE.md:
-     - Skills table: design-html
-     - Routing: "design page" → /design-html
-   These are NOT in the upstream template. After migration, add them
-   back to CLAUDE.md manually, or they'll be lost on next update.
-   Consider moving custom routing to the skill's own SKILL.md description.
-   ```
-
-6. **Audit log** — write migration entry:
+5. **Audit log** — write migration entry:
    ```
    [update-los] First-time migration to v{version} — identity extracted to memory/identity.md, {N} managed files installed, {N} custom skills preserved
    ```
 
-7. **Print summary:**
+6. **Print summary:**
    ```
    ── Migration Complete ─────────────────────────
    ✓ Identity extracted to memory/identity.md
    ✓ {N} managed files installed (v{version})
    ✓ Custom skills preserved: {list or "none"}
-   ⚠ Custom CLAUDE.md entries need manual re-add: {list or "none"}
    ──────────────────────────────────────────────
    ```
 

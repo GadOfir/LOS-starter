@@ -29,29 +29,17 @@ Then:
 
 ## Skills
 
-| Skill | Triggers | Produces | Phase | Depends on |
-|-------|----------|----------|-------|------------|
-| task-system | "start session", "new task", "cold start", task states | Task files in `.tasks/` | daily | — |
-| learn | "learn X", "research X", "study X" | Knowledge files in `memory/knowledge/` | daily | — |
-| build-project | "new project X", "build X" | Project scaffold in `memory/projects/` | daily | — |
-| evolve | "review", "status", "health check" | System health report + fixes | review | — |
-| create-skill | "create skill", "new skill", "skill for X" | New skill in `.claude/skills/` | setup | — |
-| update-los | "update", "upgrade", "check for updates" | Updated managed files + audit log | setup | — |
+Skills are defined in `.claude/skills/*/SKILL.md`. Claude loads them automatically
+at session start — no need to list them here. To add a skill, create a new
+directory under `.claude/skills/` with a `SKILL.md` file.
 
 ---
 
 ## Routing
 
-Route user intent to the matching skill. If the user's words match a skill's
-triggers (see table above), invoke that skill.
-
-- "learn X" / "research X" → /learn
-- "new project X" / "build X" → /build-project
-- "review" / "status" → /evolve
-- "start session" / "new task" → /task-system
-- "create skill" / "new skill" / "skill for X" → /create-skill
-- "update" / "upgrade" / "check for updates" → /update-los
-- Unclear → ask what I'm trying to accomplish, then route
+Route user intent by matching against each skill's `description` field in its
+SKILL.md frontmatter. Skills declare their own triggers — no central list needed.
+If the user's intent is unclear, ask what they're trying to accomplish.
 
 ---
 
