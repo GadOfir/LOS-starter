@@ -1,5 +1,14 @@
 # Knowledge
 
+## task-005 · 2026-03-29 · PASS
+**Goal:** Make CLAUDE.md routing self-assembling — remove hardcoded skill lists
+**Learned:**
+- Claude Code already scans skill SKILL.md descriptions into context — hardcoded tables are duplication
+- Removing duplication is simpler and more maintainable than adding scan logic
+**Watch out for:**
+- Onboarding steps reference specific skills by name — those are action instructions, not routing, so they stay
+---
+
 ## task-002 · 2026-03-29 · PASS
 **Goal:** Sync cross-repo tasks + back-port BMAD patterns to LOS
 **Learned:**
