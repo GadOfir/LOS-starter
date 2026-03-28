@@ -1,5 +1,5 @@
 # Active
-*(empty)*
+→ task-002 · IN_PROGRESS · phase: build · 2026-03-29
 
 # Backlog
 

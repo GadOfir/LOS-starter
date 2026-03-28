@@ -87,6 +87,38 @@ rules:
 
 ---
 
+## Cross-repo tasks
+
+Sometimes a task is planned in one repo (for full context: memory, projects, knowledge)
+but the build work targets a different repo. This is the `target_repo` field.
+
+**Rules:**
+
+1. Planning here is fine — context from the source repo helps write better analysis and plans.
+2. When `target_repo` is set and phase transitions to `build`:
+   - STOP. Do not build in the current repo.
+   - Tell the user:
+     ```
+     ⚠ This task targets [target_repo].
+     To build, copy .tasks/active/task-NNN.md to that repo's .tasks/active/
+     and run /task-system there to pick it up.
+     Plan phase stays here. Build phase lives there.
+     ```
+   - Set status → BLOCKED, blocked_reason → "Awaiting handoff to [target_repo]"
+3. The target repo should have its own .tasks/ and task-system skill. When the
+   user runs /task-system there, it picks up the copied task file and resumes
+   from build phase.
+4. After the task is done in the target repo, the user can copy the completed
+   task back to the source repo's .tasks/done/ for knowledge extraction if desired.
+
+**Edge cases:**
+- If user says "just build it here" — respect that, clear target_repo, proceed.
+- If target repo has no task-system — advise user to set it up first, or just
+  work without task-system in the target repo (the plan is already in the file).
+- Loop mode respects this: loop STOPS at the handoff point, same as BLOCKED.
+
+---
+
 ## Task file format
 
 ```markdown
@@ -96,6 +128,7 @@ title: Short description
 status: IN_PROGRESS
 phase: plan
 mode: gated
+target_repo:
 blocked_reason:
 fix_attempts: 0
 last_updated: 2025-03-24
