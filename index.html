@@ -42,6 +42,144 @@
       --mono: "JetBrains Mono", "SF Mono", "Cascadia Code", Consolas, monospace;
     }
 
+    /* Light mode — Claude Desktop warm white */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f0e8;
+        --surface: rgba(255, 255, 255, 0.85);
+        --surface-solid: #ffffff;
+        --text: #1a1a1a;
+        --text-mid: #5c5c5c;
+        --text-dim: #8c8c8c;
+        --border: #e0d8cc;
+        --grid-line: rgba(180, 160, 130, 0.08);
+        --grid-line-strong: rgba(180, 160, 130, 0.15);
+
+        --neon-blue: #2563eb;
+        --neon-purple: #7c3aed;
+        --neon-green: #059669;
+        --neon-amber: #d97706;
+        --neon-pink: #db2777;
+        --neon-cyan: #0891b2;
+
+        --neon-blue-soft: rgba(37, 99, 235, 0.08);
+        --neon-purple-soft: rgba(124, 58, 237, 0.08);
+        --neon-green-soft: rgba(5, 150, 105, 0.08);
+        --neon-amber-soft: rgba(217, 119, 6, 0.08);
+        --neon-pink-soft: rgba(219, 39, 119, 0.08);
+        --neon-cyan-soft: rgba(8, 145, 178, 0.08);
+      }
+    }
+
+    /* ---- Top nav ---- */
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.8rem 1rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .topnav a, .topnav button {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-mid);
+      text-decoration: none;
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .topnav a:hover, .topnav button:hover {
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .topnav .sep {
+      color: var(--border);
+      font-size: 0.8rem;
+      user-select: none;
+    }
+
+    /* Manual overrides */
+    [data-theme="light"] {
+      --bg: #f5f0e8;
+      --surface: rgba(255, 255, 255, 0.85);
+      --surface-solid: #ffffff;
+      --text: #1a1a1a;
+      --text-mid: #5c5c5c;
+      --text-dim: #8c8c8c;
+      --border: #e0d8cc;
+      --grid-line: rgba(180, 160, 130, 0.08);
+      --grid-line-strong: rgba(180, 160, 130, 0.15);
+
+      --neon-blue: #2563eb;
+      --neon-purple: #7c3aed;
+      --neon-green: #059669;
+      --neon-amber: #d97706;
+      --neon-pink: #db2777;
+      --neon-cyan: #0891b2;
+
+      --neon-blue-soft: rgba(37, 99, 235, 0.08);
+      --neon-purple-soft: rgba(124, 58, 237, 0.08);
+      --neon-green-soft: rgba(5, 150, 105, 0.08);
+      --neon-amber-soft: rgba(217, 119, 6, 0.08);
+      --neon-pink-soft: rgba(219, 39, 119, 0.08);
+      --neon-cyan-soft: rgba(8, 145, 178, 0.08);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0a0e1a;
+      --surface: rgba(15, 22, 40, 0.85);
+      --surface-solid: #0f1628;
+      --text: #e8ecf4;
+      --text-mid: #9aa3b8;
+      --text-dim: #5a6478;
+      --border: #1e2a42;
+      --grid-line: rgba(56, 120, 240, 0.06);
+      --grid-line-strong: rgba(56, 120, 240, 0.12);
+
+      --neon-blue: #5b9ef5;
+      --neon-purple: #a78bfa;
+      --neon-green: #34d399;
+      --neon-amber: #f5b942;
+      --neon-pink: #f472b6;
+      --neon-cyan: #22d3ee;
+
+      --neon-blue-soft: rgba(91, 158, 245, 0.1);
+      --neon-purple-soft: rgba(167, 139, 250, 0.1);
+      --neon-green-soft: rgba(52, 211, 153, 0.1);
+      --neon-amber-soft: rgba(245, 185, 66, 0.1);
+      --neon-pink-soft: rgba(244, 114, 182, 0.1);
+      --neon-cyan-soft: rgba(34, 211, 238, 0.1);
+    }
+
+    @media (prefers-color-scheme: light) {
+      .loop-rule {
+        background: rgba(5, 150, 105, 0.06);
+        border-color: rgba(5, 150, 105, 0.18);
+      }
+    }
+    [data-theme="light"] .loop-rule {
+      background: rgba(5, 150, 105, 0.06);
+      border-color: rgba(5, 150, 105, 0.18);
+    }
+
+    html { scroll-padding-top: 3.5rem; scroll-behavior: smooth; }
+
     body {
       font-family: var(--sans);
       background: var(--bg);
@@ -72,7 +210,7 @@
 
     /* ---- Hero ---- */
     .hero {
-      padding: clamp(5rem, 15vh, 10rem) 0 4rem;
+      padding: clamp(5rem, 12vh, 8rem) 0 2rem;
       text-align: center;
       animation: fadeIn 0.6s ease-out;
     }
@@ -95,7 +233,7 @@
       font-size: clamp(1.1rem, 2.2vw, 1.3rem);
       color: var(--text-mid);
       max-width: 520px;
-      margin: 0 auto 3rem;
+      margin: 0 auto 1.8rem;
       font-weight: 400;
       line-height: 1.6;
     }
@@ -119,7 +257,7 @@
     .terminal .cmt { color: var(--text-dim); }
 
     /* ---- Section ---- */
-    section { padding: 3.5rem 0; }
+    section { padding: 2.5rem 0; }
 
     .section-label {
       font-family: var(--mono);
@@ -463,6 +601,239 @@
 
     .phase-arrow { color: var(--text-dim); font-size: 0.8rem; }
 
+    /* ---- Concepts ---- */
+    .concepts {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .concept {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      backdrop-filter: blur(12px);
+      border-left: 3px solid transparent;
+    }
+
+    .concept:nth-child(1) { border-left-color: var(--neon-green); }
+    .concept:nth-child(2) { border-left-color: var(--neon-blue); }
+    .concept:nth-child(3) { border-left-color: var(--neon-purple); }
+    .concept:nth-child(4) { border-left-color: var(--neon-amber); }
+    .concept:nth-child(5) { border-left-color: var(--neon-cyan); }
+    .concept:nth-child(6) { border-left-color: var(--neon-pink); }
+
+    .concept h3 {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .concept:nth-child(1) h3 { color: var(--neon-green); }
+    .concept:nth-child(2) h3 { color: var(--neon-blue); }
+    .concept:nth-child(3) h3 { color: var(--neon-purple); }
+    .concept:nth-child(4) h3 { color: var(--neon-amber); }
+    .concept:nth-child(5) h3 { color: var(--neon-cyan); }
+    .concept:nth-child(6) h3 { color: var(--neon-pink); }
+
+    .concept p {
+      font-size: 0.98rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .concept p + p { margin-top: 0.7rem; }
+
+    .concept .highlight { color: var(--text); font-weight: 600; }
+
+    .concept code {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+      border-radius: 5px;
+      font-size: 0.86rem;
+      font-family: var(--mono);
+      font-weight: 500;
+    }
+
+    .concept-list {
+      margin: 0.6rem 0;
+      padding-left: 1.2rem;
+      color: var(--text-mid);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .concept-list code {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+      border-radius: 5px;
+      font-size: 0.84rem;
+      font-family: var(--mono);
+      font-weight: 500;
+    }
+
+    .loop-detail {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .loop-rule {
+      background: rgba(52, 211, 153, 0.05);
+      border: 1px solid rgba(52, 211, 153, 0.15);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+    }
+
+    .loop-rule h4 {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--neon-green);
+      margin-bottom: 0.3rem;
+    }
+
+    .loop-rule p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    /* ---- FAQ ---- */
+    .faq { display: grid; gap: 0.6rem; }
+
+    .faq details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    .faq summary {
+      padding: 1.2rem 1.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      user-select: none;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq summary::before {
+      content: "+";
+      font-family: var(--mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--neon-purple);
+      width: 1.5rem;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .faq details[open] summary::before {
+      content: "\2212";
+    }
+
+    .faq .faq-body {
+      padding: 0 1.8rem 1.4rem 3.8rem;
+      color: var(--text-mid);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .faq .faq-body code {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+      border-radius: 5px;
+      font-size: 0.84rem;
+      font-family: var(--mono);
+      font-weight: 500;
+    }
+
+    .faq .faq-body p + p { margin-top: 0.6rem; }
+
+    /* ---- About ---- */
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      backdrop-filter: blur(12px);
+      border-top: 3px solid var(--neon-purple);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      .about-card { grid-template-columns: 1fr; }
+    }
+
+    .about-card h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .about-card .role {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--neon-purple);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .about-card p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .about-meta {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 2;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .about-source {
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* ---- Docs subsections ---- */
+    .docs-sub {
+      margin-top: 2.5rem;
+    }
+
+    .docs-sub-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
     /* ---- Footer ---- */
     footer {
       padding: 3.5rem 0;
@@ -489,6 +860,16 @@
   </style>
 </head>
 <body>
+
+  <nav class="topnav">
+    <a href="#">Home</a>
+    <span class="sep">/</span>
+    <a href="#docs">Docs</a>
+    <span class="sep">/</span>
+    <a href="#about">About</a>
+    <span class="sep">/</span>
+    <button onclick="toggleTheme()"><span class="theme-icon">&#9789;</span> Theme</button>
+  </nav>
 
   <div class="wrap">
 
@@ -591,7 +972,7 @@
         <p>You work across multiple projects. Each one starts fresh &mdash; Claude doesn't know what you decided last week, where your infra docs live, or that you prefer Postgres over Supabase.</p>
         <p><span class="highlight">LOS is one git repo that holds all of that.</span> Your projects, your knowledge, your decisions, your daily logs. It lives on GitHub, you pull it anywhere, and any project can read from it or write back to it.</p>
         <p>When you open a new project with a <code>.claude.los</code> file in it, Claude already knows who you are, what you're working on, and where everything lives. When you finish something, it logs back. <span class="highlight">Your context follows you.</span></p>
-        <p>And to be clear &mdash; LOS doesn't store your passwords or API keys. It stores <em>where they are</em>. "AWS credentials: 1Password vault". "SSH key: auth cloud/id_ed25519". The pointers, not the secrets.</p>
+        <p>And to be clear &mdash; LOS doesn't store passwords or API keys. It's markdown in a git repo. Store references to where secrets live, never the secrets themselves.</p>
       </div>
 
       <div class="flow">
@@ -668,6 +1049,166 @@
       </div>
     </section>
 
+    <!-- Docs -->
+    <section id="docs">
+      <div class="section-label" style="color: var(--neon-green);">Docs</div>
+      <h2>How it actually works</h2>
+      <p class="desc">Everything you need to understand LOS. Concepts, then common questions.</p>
+
+      <div class="docs-sub">
+        <div class="docs-sub-label">Concepts</div>
+      </div>
+      <div class="concepts">
+
+        <div class="concept">
+          <h3>Loop mode</h3>
+          <p>This is LOS's most powerful feature. Say <span class="highlight">"loop it"</span> and Claude runs autonomously through the full task lifecycle &mdash; plan, build, verify, learn &mdash; without stopping to ask for approval.</p>
+          <div class="loop-detail">
+            <div class="loop-rule">
+              <h4>Auto-advance</h4>
+              <p>Plan &rarr; build &rarr; verify &rarr; learn &rarr; close. Each phase triggers the next automatically.</p>
+            </div>
+            <div class="loop-rule">
+              <h4>Self-correcting</h4>
+              <p>If verify fails, it tries to fix. If two fixes fail, it stops and asks you. It never spins forever.</p>
+            </div>
+            <div class="loop-rule">
+              <h4>Safe boundaries</h4>
+              <p>New tasks always need one human plan approval. After that, loop takes over. STUCK and BLOCKED always stop.</p>
+            </div>
+            <div class="loop-rule">
+              <h4>Walk away</h4>
+              <p>Say "handle it" and go do something else. Claude works until it's done, stuck, or blocked. You come back to results.</p>
+            </div>
+          </div>
+          <p>Loop mode works because every task is a file with strict phases. Claude can't skip steps or go in circles &mdash; the system constrains it. <span class="highlight">The constraint is what makes autonomy safe.</span></p>
+        </div>
+
+        <div class="concept">
+          <h3>Memory system</h3>
+          <p>Everything Claude needs to know about you and your work lives in <code>memory/</code>. It's just folders and markdown files.</p>
+          <ul class="concept-list">
+            <li><code>memory/identity.md</code> &mdash; your name, role, goal, current state. Survives every update.</li>
+            <li><code>memory/projects/</code> &mdash; one folder per project with a readme, tasks, and decision log.</li>
+            <li><code>memory/knowledge/</code> &mdash; what you've learned. Say "learn Docker" and it goes here.</li>
+            <li><code>memory/areas/</code> &mdash; life areas (career, health, etc.) for non-project context.</li>
+            <li><code>memory/decisions/</code> &mdash; choices you've made and why. Prevents re-litigating.</li>
+          </ul>
+          <p>Memory is <span class="highlight">yours and untouchable</span>. Updates replace system files but never touch <code>memory/</code>. It's the one folder that grows over time and never resets.</p>
+        </div>
+
+        <div class="concept">
+          <h3>Skills</h3>
+          <p>A skill is a <code>SKILL.md</code> file in <code>.claude/skills/</code>. It tells Claude what to do when you say certain things. Each skill declares its own triggers &mdash; there's no central routing table to maintain.</p>
+          <p>LOS ships with 6 core skills: task-system, learn, build-project, evolve, create-skill, and update-los. But you can <span class="highlight">create your own</span>. Say "create skill for code review" and Claude writes a new skill file. It works on the next message.</p>
+          <p><span class="highlight">Design skills to be portable.</span> A skill you write in LOS can be copied into any project. The task system, for example, works in any repo &mdash; just drop the skill folder in and say "start session". We highly recommend taking it with you to every project.</p>
+          <p>You can also ask Claude inside a project to create a project-specific skill based on one you already have in LOS. Your LOS skills become templates for the rest of your work.</p>
+          <p>Skills you create are <span class="highlight">never overwritten</span> by updates. Only skills marked <code>LOS:managed</code> get replaced &mdash; your custom ones are yours.</p>
+        </div>
+
+        <div class="concept">
+          <h3>CLAUDE.md</h3>
+          <p>The orchestration file. It's what Claude reads first when you open a session. It contains your onboarding flow, autonomy rules, system rules, and self-healing checks.</p>
+          <p>It does <em>not</em> contain your identity or a list of skills. Identity lives in <code>memory/identity.md</code>. Skills are discovered automatically from <code>.claude/skills/</code>. This means <span class="highlight">CLAUDE.md is fully replaceable</span> &mdash; updates swap it out without losing anything personal.</p>
+        </div>
+
+        <div class="concept">
+          <h3>Updates</h3>
+          <p>Say <span class="highlight">"update los"</span> and Claude checks GitHub for a newer version of the template. It shows you what changed, and if you approve, it replaces system files.</p>
+          <p>The rule is simple: any file with a <code>LOS:managed</code> marker gets replaced. Everything else is untouched. Your memory, tasks, logs, and custom skills are safe. If something goes wrong, it's all in git &mdash; one <code>git checkout</code> undoes any file.</p>
+        </div>
+
+        <div class="concept">
+          <h3>Cross-project</h3>
+          <p>Drop a <code>.claude.los</code> file in any project repo. It tells Claude where your LOS lives. When you open that project, Claude reads your LOS for context &mdash; who you are, what you know, what you decided &mdash; without you repeating anything.</p>
+          <p>Tasks can target other repos too. Plan a task in LOS, set <code>target_repo</code>, and the system hands it off to the right place for building. <span class="highlight">Plan where you have context. Build where the code lives.</span></p>
+        </div>
+
+      </div>
+
+      <div class="docs-sub">
+        <div class="docs-sub-label">FAQ</div>
+      </div>
+      <div class="faq">
+
+        <details>
+          <summary>Does LOS store passwords or API keys?</summary>
+          <div class="faq-body">
+            <p>No. LOS stores references to where your secrets live ("AWS creds: vault X", "SSH key: path Y") but never the secrets themselves. It's markdown files in a git repo &mdash; don't put anything sensitive in them.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What do I need to run this?</summary>
+          <div class="faq-body">
+            <p>Git and Claude Code (the CLI). That's it. No npm, no Python, no Docker. Clone the repo, run <code>claude</code>, answer three onboarding questions.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Can I use this with an existing project?</summary>
+          <div class="faq-body">
+            <p>Yes. Create a <code>.claude.los</code> file in your project that points to your LOS directory. Claude will read your LOS context when working in that project. The project keeps its own code and git history &mdash; LOS just provides the context layer.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What happens if an update breaks something?</summary>
+          <div class="faq-body">
+            <p>Everything is in git. Run <code>git diff</code> to see what changed, <code>git checkout -- filename</code> to revert any file. Updates only touch files marked <code>LOS:managed</code> &mdash; your data is never at risk.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Can two people share a LOS?</summary>
+          <div class="faq-body">
+            <p>Yes. It's a git repo. Push and pull as usual. Projects, decisions, task history, and knowledge are shared. Each person's sessions add to the same logs. Works well for pairs or small teams.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How is this different from a notes app?</summary>
+          <div class="faq-body">
+            <p>A notes app stores text. LOS stores text <em>and acts on it</em>. Your projects, knowledge, and decisions aren't just files &mdash; they're context that Claude reads and uses. Say "start session" and it knows your active task, what failed last time, and what to try next. The files are the database and the AI reads them as instructions.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What if I want a skill LOS doesn't have?</summary>
+          <div class="faq-body">
+            <p>Say "create skill for [whatever]". Claude writes a SKILL.md file, and it works immediately. Your custom skills survive updates. Some examples people have built: deploy checklist, code review, daily standup summary, meeting notes formatter.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Is loop mode safe? Can Claude go rogue?</summary>
+          <div class="faq-body">
+            <p>Loop mode has hard constraints. It must follow strict phases (plan &rarr; build &rarr; verify). It can't skip verification. After two failed fixes it stops automatically (STUCK). It can't proceed past BLOCKED status. And new tasks always require one human plan approval before loop mode kicks in. The autonomy is real, but bounded.</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="section-label" style="color: var(--neon-purple);">About</div>
+      <h2>Who built this</h2>
+      <div class="about-card">
+        <div>
+          <h3>Gad</h3>
+          <div class="role">Backend/Systems engineer</div>
+          <p>Transitioning to developer. Built LOS to organize projects, track learning, and maintain context across codebases. Tired of every Claude conversation starting from zero &mdash; so I made a repo that remembers.</p>
+          <p class="about-source">Pulled from <code>memory/identity.md</code></p>
+        </div>
+        <div class="about-meta">
+          projects: 2<br>
+          tasks completed: 6<br>
+          system version: v0.3.0
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <footer>
@@ -677,6 +1218,27 @@
       Built with <a href="https://claude.ai/code">Claude Code</a>
     </div>
   </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : (current === 'dark' ? 'light' :
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light'));
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('los-theme', next);
+      document.querySelector('.theme-icon').innerHTML = next === 'light' ? '&#9789;' : '&#9788;';
+    }
+
+    // Restore saved theme
+    (function() {
+      const saved = localStorage.getItem('los-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        document.querySelector('.theme-icon').innerHTML = saved === 'light' ? '&#9789;' : '&#9788;';
+      }
+    })();
+  </script>
 
 </body>
 </html>

@@ -3,6 +3,7 @@
 # Backlog
 
 # Done
+✓ task-006 · PASS · Add docs (Concepts + FAQ) to landing page · 2026-03-29
 ✓ task-005 · PASS · Self-assembling CLAUDE.md routing · 2026-03-29
 ✓ task-004 · PASS · Safe LOS update mechanism with memory preservation · 2026-03-29
 ✓ task-003 · PASS · Add autonomy prompt + harden cross-repo handoff · 2026-03-29

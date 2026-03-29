@@ -1,5 +1,14 @@
 # Knowledge
 
+## task-006 · 2026-03-29 · PASS
+**Goal:** Add Concepts + FAQ docs sections to landing page
+**Learned:**
+- details/summary CSS accordion needs no JS — works everywhere
+- Loop mode needs visual grid to convey bounded autonomy, not just bullets
+**Watch out for:**
+- index.html at 981 lines — don't split HTML pages like logic files
+---
+
 ## task-005 · 2026-03-29 · PASS
 **Goal:** Make CLAUDE.md routing self-assembling — remove hardcoded skill lists
 **Learned:**
