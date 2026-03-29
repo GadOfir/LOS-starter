@@ -868,6 +868,8 @@
     <span class="sep">/</span>
     <a href="#about">About</a>
     <span class="sep">/</span>
+    <a href="https://github.com/GadOfir/LOS-starter" target="_blank">GitHub</a>
+    <span class="sep">/</span>
     <button onclick="toggleTheme()"><span class="theme-icon">&#9789;</span> Theme</button>
   </nav>
 
@@ -875,7 +877,7 @@
 
     <header class="hero">
       <h1><span class="los">LOS</span><br>Life Operating System</h1>
-      <p class="hero-sub">One repo that remembers everything &mdash; your projects, your rules, your decisions, what you've learned. Clone it, connect it to any project, and Claude knows who you are and where things live.</p>
+      <p class="hero-sub">One repo that remembers everything &mdash; dev projects, research, hobbies, life goals. Your decisions, your knowledge, your tasks. Clone it, and Claude knows who you are and where things live.</p>
       <div class="terminal">
         <span class="prompt">$</span> <span class="cmd">git clone</span> <span class="arg">los-starter</span> <span class="cmt"># your persistent brain</span><br>
         <span class="prompt">$</span> <span class="cmd">cd</span> <span class="arg">any-project</span> <span class="cmd">&&</span> <span class="arg">claude</span><br>
@@ -960,7 +962,7 @@
         &nbsp;&nbsp;<span class="f g">decisions/</span> <span class="c">........... choices you've made</span><br>
         <span class="f a">logs/</span> <span class="c">.................. one file per day</span><br>
         <span class="f p">.tasks/</span> <span class="c">................ shows up when you start one</span><br>
-        <span class="f cy">.claude.los</span> <span class="c">............ drop into other repos</span>
+        <span class="f cy">.claude.los</span> <span class="c">............ optional — link other repos to LOS</span>
       </div>
     </section>
 
@@ -971,7 +973,7 @@
       <div class="point">
         <p>You work across multiple projects. Each one starts fresh &mdash; Claude doesn't know what you decided last week, where your infra docs live, or that you prefer Postgres over Supabase.</p>
         <p><span class="highlight">LOS is one git repo that holds all of that.</span> Your projects, your knowledge, your decisions, your daily logs. It lives on GitHub, you pull it anywhere, and any project can read from it or write back to it.</p>
-        <p>When you open a new project with a <code>.claude.los</code> file in it, Claude already knows who you are, what you're working on, and where everything lives. When you finish something, it logs back. <span class="highlight">Your context follows you.</span></p>
+        <p>Connect any project to LOS by telling Claude where it lives, or drop a <code>.claude.los</code> file in the project root so it finds it automatically. Either way, Claude knows who you are, what you're working on, and where everything lives. <span class="highlight">Your context follows you.</span></p>
         <p>And to be clear &mdash; LOS doesn't store passwords or API keys. It's markdown in a git repo. Store references to where secrets live, never the secrets themselves.</p>
       </div>
 
@@ -1028,11 +1030,11 @@
         </div>
         <div class="case">
           <h3>Switching between repos</h3>
-          <p>You have 5 projects. Each one has <code>.claude.los</code> in it. Claude reads your LOS to understand what you decided in the other ones.</p>
+          <p>You have 5 projects. Point them to your LOS and Claude reads your context &mdash; what you decided, what you learned, what's active &mdash; across all of them.</p>
         </div>
         <div class="case">
-          <h3>Learning something new</h3>
-          <p>Say "learn Terraform modules" and it writes a knowledge file. Three months later in a different project, that knowledge is still there.</p>
+          <h3>Learning anything</h3>
+          <p>Say "learn sourdough starters" or "learn Terraform modules" &mdash; it writes a knowledge file. Months later, that knowledge is still there, ready when you need it.</p>
         </div>
         <div class="case">
           <h3>Picking up after a break</h3>
@@ -1041,6 +1043,10 @@
         <div class="case">
           <h3>Working with a partner</h3>
           <p>Two people, same LOS repo. Your decisions, task history, and project status are shared. No "where did we leave off?" conversations.</p>
+        </div>
+        <div class="case">
+          <h3>Tracking non-code projects</h3>
+          <p>Renovating your apartment, planning a trip, researching a career move. Say "new project kitchen-reno" and track decisions, tasks, and what you've learned &mdash; same system, any domain.</p>
         </div>
         <div class="case">
           <h3>Building your own workflow</h3>
@@ -1120,7 +1126,7 @@
 
         <div class="concept">
           <h3>Cross-project</h3>
-          <p>Drop a <code>.claude.los</code> file in any project repo. It tells Claude where your LOS lives. When you open that project, Claude reads your LOS for context &mdash; who you are, what you know, what you decided &mdash; without you repeating anything.</p>
+          <p>Tell Claude where your LOS lives, or drop a <code>.claude.los</code> file in any project root so it finds it automatically. Either way, Claude reads your LOS for context &mdash; who you are, what you know, what you decided &mdash; without you repeating anything.</p>
           <p>Tasks can target other repos too. Plan a task in LOS, set <code>target_repo</code>, and the system hands it off to the right place for building. <span class="highlight">Plan where you have context. Build where the code lives.</span></p>
         </div>
 
@@ -1148,7 +1154,7 @@
         <details>
           <summary>Can I use this with an existing project?</summary>
           <div class="faq-body">
-            <p>Yes. Create a <code>.claude.los</code> file in your project that points to your LOS directory. Claude will read your LOS context when working in that project. The project keeps its own code and git history &mdash; LOS just provides the context layer.</p>
+            <p>Yes. Just tell Claude where your LOS directory is, or create a <code>.claude.los</code> file in your project root for automatic discovery. The project keeps its own code and git history &mdash; LOS just provides the context layer.</p>
           </div>
         </details>
 

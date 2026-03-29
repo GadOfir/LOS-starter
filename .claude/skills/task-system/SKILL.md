@@ -188,7 +188,7 @@ At the start of every conversation, before anything else:
 4. If task found → read frontmatter, render briefing.
 5. Re-sync `index.md` Active pointer to match what's actually in `active/`.
 6. Load `knowledge.md` into context.
-7. **Update `# State` in `memory/identity.md`** — set `Active task:` and `Last session:` to current values.
+7. **If `memory/identity.md` exists**, update `# State` — set `Active task:` and `Last session:` to current values. (Skip if not in a LOS repo.)
 8. **Ask: gated or loop mode?** (unless human already specified)
 
 ### Briefing templates
@@ -473,7 +473,7 @@ Only runs on PASS or ABANDONED. Refuse on any other status.
 
 3. **Move file** — `active/task-x.md` → `done/task-x.md`
 
-4. **Update `# State` in `memory/identity.md`** — set `Active task:` to empty, update `Last session:` to today's date.
+4. **If `memory/identity.md` exists**, update `# State` — set `Active task:` to empty, update `Last session:` to today's date. (Skip if not in a LOS repo.)
 
 5. **Report** and offer next backlog item or "backlog empty".
 

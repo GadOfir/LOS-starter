@@ -1,6 +1,10 @@
 # Active
 
 # Backlog
+- BUG: VERSION deleted after migration → re-migration creates blank identity.md (must check if identity.md has data before overwriting)
+- BUG: Upstream removes a managed skill → update-los doesn't detect removed files, only fetches what exists upstream
+- BUG: User modified a managed file → update-los overwrites without warning or diff preview
+- BUG: No network during update → no explicit error handling, relies on Claude judgment
 
 # Done
 ✓ task-006 · PASS · Add docs (Concepts + FAQ) to landing page · 2026-03-29
