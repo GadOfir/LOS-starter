@@ -128,11 +128,10 @@ If all true → run migration. If `VERSION` exists → skip to regular update fl
 ### Step 1: Check versions
 
 1. Read local `VERSION` file
-2. Fetch upstream `VERSION` from GitHub raw URL with cache-bust:
+2. Fetch upstream `VERSION` from GitHub raw URL:
    ```
-   curl -s "https://raw.githubusercontent.com/GadOfir/LOS-starter/master/VERSION?ts=$(date +%s)"
+   curl -s "https://raw.githubusercontent.com/GadOfir/LOS-starter/master/VERSION"
    ```
-   Always append `?ts={unix_timestamp}` to force fresh fetch (bypass GitHub CDN cache).
 3. Compare. If same → "Already up to date." → stop.
 4. If upstream is newer → continue.
 
