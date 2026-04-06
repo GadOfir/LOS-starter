@@ -28,8 +28,20 @@ LOS instance. Preserves all user data (memory, tasks, logs, identity).
 ## What gets updated (managed files)
 
 Any file containing `LOS:managed` in its first 5 lines is eligible for update.
-This includes `CLAUDE.md`, `VERSION`, and any skill SKILL.md that has the marker.
-User-created skills won't have this marker, so they're never touched.
+This includes:
+- `CLAUDE.md`
+- `VERSION`
+- **All `SKILL.md` files in `.claude/skills/` subdirectories** — fetch and update each one individually
+
+**Critical:** When fetching, iterate over **each skill directory** and fetch its SKILL.md from upstream:
+```
+For each upstream skill in .claude/skills/:
+  - Check if local copy exists
+  - If yes and has LOS:managed marker: fetch upstream version and diff
+  - If local doesn't exist but upstream does: create it
+```
+
+User-created skills (those without `LOS:managed` marker) are never touched.
 
 ---
 
@@ -137,10 +149,11 @@ If all true → run migration. If `VERSION` exists → skip to regular update fl
 
 ### Step 2: Fetch and diff
 
-For each managed file:
-1. Fetch the upstream version from GitHub
-2. Diff against local version
+For each managed file (CLAUDE.md, VERSION, and all `.claude/skills/*/SKILL.md` with LOS:managed):
+1. Fetch the upstream version from GitHub raw URL
+2. Diff against local version (if local exists)
 3. Collect changes into a summary
+4. **Don't forget:** This includes iterating `.claude/skills/` and fetching each SKILL.md individually
 
 ### Step 3: Show preview
 
@@ -168,10 +181,10 @@ If user says "show diffs" → display each file diff inline.
 
 ### Step 4: Apply
 
-1. For each changed managed file → replace local with upstream version
-2. For new managed files → create them
+1. **CLAUDE.md and VERSION:** replace local with upstream version
+2. **Each skill SKILL.md:** replace local file with upstream version (or create if new)
 3. Update local `VERSION` to match upstream
-4. If upstream added new skill directories → create them
+4. If upstream added new skill directories: create the entire `.claude/skills/{skill-name}/` structure with the SKILL.md file
 
 ### Step 5: Audit
 
