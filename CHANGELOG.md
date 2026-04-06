@@ -5,6 +5,25 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [0.4.0] - 2026-04-06
+
+### Changed
+- Flattened `memory/` structure — removed `areas/`, `entities/`, `decisions/` directories
+- All non-project knowledge now lives in `memory/knowledge/` (one flat folder)
+- `/learn` skill upgraded: source ingestion mode (URL, file, pasted text), cross-update step that propagates new knowledge across existing files, contradiction flagging, knowledge index auto-maintenance
+- `/evolve` scans `memory/knowledge/` instead of `memory/areas/`, detects legacy directories
+- `/update-los` now fetches all managed `SKILL.md` files (not just CLAUDE.md and VERSION)
+- Self-healing detects legacy dirs (areas/, entities/, decisions/) and suggests migration
+
+### Added
+- `memory/knowledge/index.md` — auto-maintained catalog of all knowledge files
+- Source ingestion in `/learn` — ingest URLs, files, or pasted text into structured knowledge
+
+### Breaking
+- Existing LOS instances must move files from `memory/areas/` and `memory/entities/` into `memory/knowledge/` and delete the empty directories
+
+---
+
 ## [0.3.0] - 2026-03-29
 
 ### Changed
