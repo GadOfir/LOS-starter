@@ -15,14 +15,14 @@ metadata:
 ## Part 1: Review
 1. List projects in `memory/projects/` — status, task completion
 2. Flag stale projects (no updates 14+ days)
-3. Scan `memory/areas/` for open questions
+3. Scan `memory/knowledge/` for stale or relevant context
 4. Summarize `logs/` from last 7 days
 5. Show `.tasks/` active task if exists
 
 ## Part 2: Health Check (auto-fix safe issues)
 6. `.tasks/index.md` out of sync with `active/` and `done/` → rebuild
 7. Each project has README.md, tasks.md, decisions.md → flag missing
-8. Orphan files in `memory/` → flag
+8. Orphan files in `memory/` → flag (legacy dirs like areas/, entities/, decisions/ → migrate to knowledge/)
 9. Logs gap > 3 days → note as "dark period"
 10. Knowledge files stale > 30 days → suggest refresh
 11. `# State` in `memory/identity.md` out of sync with filesystem → fix it

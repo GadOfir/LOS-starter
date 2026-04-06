@@ -4,8 +4,7 @@ LOS_PATH=CHANGE_ME
 
 ## What Claude can do with this:
 - Read $LOS_PATH/memory/projects/ to see all my projects
-- Read $LOS_PATH/memory/knowledge/ for accumulated knowledge
-- Read $LOS_PATH/memory/areas/ for life context (career, health, etc.)
+- Read $LOS_PATH/memory/knowledge/ for accumulated knowledge (topics, life areas, sources)
 - Append to $LOS_PATH/logs/{YYYY-MM-DD}.md to log cross-project actions
   Format: [{this-project-name}] {action}: {details}
 

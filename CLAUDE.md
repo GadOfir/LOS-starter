@@ -81,4 +81,5 @@ Mid-plan pauses to ask for approval are a bug, not a feature.
 - Logs gap > 3 days → note as "dark period"
 - Knowledge files stale > 30 days → suggest refresh
 - Orphan files in memory/ → flag for cleanup
+- Legacy dirs (memory/areas/, memory/entities/, memory/decisions/) → migrate contents to memory/knowledge/
 - `memory/identity.md` State out of sync with filesystem → fix it

@@ -122,3 +122,22 @@ This is what makes knowledge compound. After writing/updating the primary file:
 - Keep updates surgical — add a bullet or a link, don't rewrite sections
 - Preserve existing content — append, don't replace
 - When in doubt about a contradiction, flag it rather than silently overwriting
+
+---
+
+## Knowledge index
+
+After any write to `memory/knowledge/`, update `memory/knowledge/index.md`:
+
+```markdown
+# Knowledge Index
+
+| File | Summary | Updated |
+|------|---------|---------|
+| [topic.md](topic.md) | One-line description | YYYY-MM-DD |
+| [sources/name.md](sources/name.md) | One-line description | YYYY-MM-DD |
+```
+
+- One row per file, sorted by last updated (newest first)
+- Create `index.md` if it doesn't exist
+- This helps cross-update: read index first to find relevant files, then drill in
