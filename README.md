@@ -35,7 +35,12 @@ LOS is the optional **memory layer** for the [Kingdom of God](https://gadofir.gi
 | CONTRACTX | Contracts | https://gadofir.github.io/contractx-starter/ |
 | Shit Hit The Fan | Triage | https://gadofir.github.io/shit-hit-the-fan/ |
 | Agent Retro | Learning | https://gadofir.github.io/agent-retro/ |
+| TechDebt | Drift | https://gadofir.github.io/techdebt/ |
 | LOS | Memory (optional) | https://gadofir.github.io/LOS-starter/ |
+
+LOS is a standalone system. If you run it, the Kingdom can use it as its memory layer —
+advisory only. Its "never stop" autonomy is scoped to LOS; under the Kingdom, God gates
+major decisions.
 
 ## License
 
